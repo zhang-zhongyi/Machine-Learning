@@ -1,0 +1,1987 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ML Assignment 5}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{machine-learning-and-predictive-analytics}{%
+\section{Machine Learning and Predictive
+Analytics}\label{machine-learning-and-predictive-analytics}}
+
+\hypertarget{assignment-5}{%
+\section{Assignment 5}\label{assignment-5}}
+
+    Name: Troy Zhongyi Zhang\\
+Netid: zhongyiz@uchicago.edu
+
+    \hypertarget{boosting-and-classification}{%
+\subsubsection{Boosting and
+Classification:}\label{boosting-and-classification}}
+
+Data: The data we will use has been taken from here:
+https://archive.ics.uci.edu/ml/datasets/Adult (Links to an external
+site.)
+
+There will be some basic preprocessing work to do, some of which is
+outlined. But please post on Canvas as questions arise. The goal of this
+homework is to take census data and predict whether an individual would
+have an income that exceeds \$50k/yr. This is a binary classification
+problem.
+
+    \hypertarget{data-processing}{%
+\section{1. Data Processing}\label{data-processing}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+ch}{\PYZsh{}!pip install certifi}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{ssl}
+        \PY{n}{ssl}\PY{o}{.}\PY{n}{\PYZus{}create\PYZus{}default\PYZus{}https\PYZus{}context} \PY{o}{=} \PY{n}{ssl}\PY{o}{.}\PY{n}{\PYZus{}create\PYZus{}unverified\PYZus{}context}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}import urllib.request as urlrq}
+        \PY{c+c1}{\PYZsh{}import certifi}
+        \PY{c+c1}{\PYZsh{}resp = urlrq.urlopen(\PYZsq{}https://archive.ics.uci.edu/ml/machine\PYZhy{}learning\PYZhy{}databases/adult/adult.data\PYZsq{}, }
+        \PY{c+c1}{\PYZsh{}                     cafile=certifi.where())}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}1\PYZhy{}(a)}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{n}{adult\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://archive.ics.uci.edu/ml/machine\PYZhy{}learning\PYZhy{}databases/adult/adult.data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{header} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,} \PY{n}{skipinitialspace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{adult\PYZus{}df\PYZus{}header} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://archive.ics.uci.edu/ml/machine\PYZhy{}learning\PYZhy{}databases/adult/adult.names}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                      \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}1\PYZhy{}(b)}
+        \PY{n}{adult\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{workclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fnlwgt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{education}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{education\PYZhy{}num}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{marital\PYZhy{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{occupation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relationship}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{race}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{capital\PYZhy{}gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{capital\PYZhy{}loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hours\PYZhy{}per\PYZhy{}week}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{native\PYZhy{}country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{adult\PYZus{}df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}        age         workclass  fnlwgt     education  education-num  \textbackslash{}
+        0       39         State-gov   77516     Bachelors             13   
+        1       50  Self-emp-not-inc   83311     Bachelors             13   
+        2       38           Private  215646       HS-grad              9   
+        3       53           Private  234721          11th              7   
+        4       28           Private  338409     Bachelors             13   
+        5       37           Private  284582       Masters             14   
+        6       49           Private  160187           9th              5   
+        7       52  Self-emp-not-inc  209642       HS-grad              9   
+        8       31           Private   45781       Masters             14   
+        9       42           Private  159449     Bachelors             13   
+        10      37           Private  280464  Some-college             10   
+        11      30         State-gov  141297     Bachelors             13   
+        12      23           Private  122272     Bachelors             13   
+        13      32           Private  205019    Assoc-acdm             12   
+        14      40           Private  121772     Assoc-voc             11   
+        15      34           Private  245487       7th-8th              4   
+        16      25  Self-emp-not-inc  176756       HS-grad              9   
+        17      32           Private  186824       HS-grad              9   
+        18      38           Private   28887          11th              7   
+        19      43  Self-emp-not-inc  292175       Masters             14   
+        20      40           Private  193524     Doctorate             16   
+        21      54           Private  302146       HS-grad              9   
+        22      35       Federal-gov   76845           9th              5   
+        23      43           Private  117037          11th              7   
+        24      59           Private  109015       HS-grad              9   
+        25      56         Local-gov  216851     Bachelors             13   
+        26      19           Private  168294       HS-grad              9   
+        27      54                 ?  180211  Some-college             10   
+        28      39           Private  367260       HS-grad              9   
+        29      49           Private  193366       HS-grad              9   
+        {\ldots}    {\ldots}               {\ldots}     {\ldots}           {\ldots}            {\ldots}   
+        32531   30                 ?   33811     Bachelors             13   
+        32532   34           Private  204461     Doctorate             16   
+        32533   54           Private  337992     Bachelors             13   
+        32534   37           Private  179137  Some-college             10   
+        32535   22           Private  325033          12th              8   
+        32536   34           Private  160216     Bachelors             13   
+        32537   30           Private  345898       HS-grad              9   
+        32538   38           Private  139180     Bachelors             13   
+        32539   71                 ?  287372     Doctorate             16   
+        32540   45         State-gov  252208       HS-grad              9   
+        32541   41                 ?  202822       HS-grad              9   
+        32542   72                 ?  129912       HS-grad              9   
+        32543   45         Local-gov  119199    Assoc-acdm             12   
+        32544   31           Private  199655       Masters             14   
+        32545   39         Local-gov  111499    Assoc-acdm             12   
+        32546   37           Private  198216    Assoc-acdm             12   
+        32547   43           Private  260761       HS-grad              9   
+        32548   65  Self-emp-not-inc   99359   Prof-school             15   
+        32549   43         State-gov  255835  Some-college             10   
+        32550   43  Self-emp-not-inc   27242  Some-college             10   
+        32551   32           Private   34066          10th              6   
+        32552   43           Private   84661     Assoc-voc             11   
+        32553   32           Private  116138       Masters             14   
+        32554   53           Private  321865       Masters             14   
+        32555   22           Private  310152  Some-college             10   
+        32556   27           Private  257302    Assoc-acdm             12   
+        32557   40           Private  154374       HS-grad              9   
+        32558   58           Private  151910       HS-grad              9   
+        32559   22           Private  201490       HS-grad              9   
+        32560   52      Self-emp-inc  287927       HS-grad              9   
+        
+                      marital-status         occupation    relationship  \textbackslash{}
+        0              Never-married       Adm-clerical   Not-in-family   
+        1         Married-civ-spouse    Exec-managerial         Husband   
+        2                   Divorced  Handlers-cleaners   Not-in-family   
+        3         Married-civ-spouse  Handlers-cleaners         Husband   
+        4         Married-civ-spouse     Prof-specialty            Wife   
+        5         Married-civ-spouse    Exec-managerial            Wife   
+        6      Married-spouse-absent      Other-service   Not-in-family   
+        7         Married-civ-spouse    Exec-managerial         Husband   
+        8              Never-married     Prof-specialty   Not-in-family   
+        9         Married-civ-spouse    Exec-managerial         Husband   
+        10        Married-civ-spouse    Exec-managerial         Husband   
+        11        Married-civ-spouse     Prof-specialty         Husband   
+        12             Never-married       Adm-clerical       Own-child   
+        13             Never-married              Sales   Not-in-family   
+        14        Married-civ-spouse       Craft-repair         Husband   
+        15        Married-civ-spouse   Transport-moving         Husband   
+        16             Never-married    Farming-fishing       Own-child   
+        17             Never-married  Machine-op-inspct       Unmarried   
+        18        Married-civ-spouse              Sales         Husband   
+        19                  Divorced    Exec-managerial       Unmarried   
+        20        Married-civ-spouse     Prof-specialty         Husband   
+        21                 Separated      Other-service       Unmarried   
+        22        Married-civ-spouse    Farming-fishing         Husband   
+        23        Married-civ-spouse   Transport-moving         Husband   
+        24                  Divorced       Tech-support       Unmarried   
+        25        Married-civ-spouse       Tech-support         Husband   
+        26             Never-married       Craft-repair       Own-child   
+        27        Married-civ-spouse                  ?         Husband   
+        28                  Divorced    Exec-managerial   Not-in-family   
+        29        Married-civ-spouse       Craft-repair         Husband   
+        {\ldots}                      {\ldots}                {\ldots}             {\ldots}   
+        32531          Never-married                  ?   Not-in-family   
+        32532     Married-civ-spouse     Prof-specialty         Husband   
+        32533     Married-civ-spouse    Exec-managerial         Husband   
+        32534               Divorced       Adm-clerical       Unmarried   
+        32535          Never-married    Protective-serv       Own-child   
+        32536          Never-married    Exec-managerial   Not-in-family   
+        32537          Never-married       Craft-repair   Not-in-family   
+        32538               Divorced     Prof-specialty       Unmarried   
+        32539     Married-civ-spouse                  ?         Husband   
+        32540              Separated       Adm-clerical       Own-child   
+        32541              Separated                  ?   Not-in-family   
+        32542     Married-civ-spouse                  ?         Husband   
+        32543               Divorced     Prof-specialty       Unmarried   
+        32544               Divorced      Other-service   Not-in-family   
+        32545     Married-civ-spouse       Adm-clerical            Wife   
+        32546               Divorced       Tech-support   Not-in-family   
+        32547     Married-civ-spouse  Machine-op-inspct         Husband   
+        32548          Never-married     Prof-specialty   Not-in-family   
+        32549               Divorced       Adm-clerical  Other-relative   
+        32550     Married-civ-spouse       Craft-repair         Husband   
+        32551     Married-civ-spouse  Handlers-cleaners         Husband   
+        32552     Married-civ-spouse              Sales         Husband   
+        32553          Never-married       Tech-support   Not-in-family   
+        32554     Married-civ-spouse    Exec-managerial         Husband   
+        32555          Never-married    Protective-serv   Not-in-family   
+        32556     Married-civ-spouse       Tech-support            Wife   
+        32557     Married-civ-spouse  Machine-op-inspct         Husband   
+        32558                Widowed       Adm-clerical       Unmarried   
+        32559          Never-married       Adm-clerical       Own-child   
+        32560     Married-civ-spouse    Exec-managerial            Wife   
+        
+                             race     sex  capital-gain  capital-loss  hours-per-week  \textbackslash{}
+        0                   White    Male          2174             0              40   
+        1                   White    Male             0             0              13   
+        2                   White    Male             0             0              40   
+        3                   Black    Male             0             0              40   
+        4                   Black  Female             0             0              40   
+        5                   White  Female             0             0              40   
+        6                   Black  Female             0             0              16   
+        7                   White    Male             0             0              45   
+        8                   White  Female         14084             0              50   
+        9                   White    Male          5178             0              40   
+        10                  Black    Male             0             0              80   
+        11     Asian-Pac-Islander    Male             0             0              40   
+        12                  White  Female             0             0              30   
+        13                  Black    Male             0             0              50   
+        14     Asian-Pac-Islander    Male             0             0              40   
+        15     Amer-Indian-Eskimo    Male             0             0              45   
+        16                  White    Male             0             0              35   
+        17                  White    Male             0             0              40   
+        18                  White    Male             0             0              50   
+        19                  White  Female             0             0              45   
+        20                  White    Male             0             0              60   
+        21                  Black  Female             0             0              20   
+        22                  Black    Male             0             0              40   
+        23                  White    Male             0          2042              40   
+        24                  White  Female             0             0              40   
+        25                  White    Male             0             0              40   
+        26                  White    Male             0             0              40   
+        27     Asian-Pac-Islander    Male             0             0              60   
+        28                  White    Male             0             0              80   
+        29                  White    Male             0             0              40   
+        {\ldots}                   {\ldots}     {\ldots}           {\ldots}           {\ldots}             {\ldots}   
+        32531  Asian-Pac-Islander  Female             0             0              99   
+        32532               White    Male             0             0              60   
+        32533  Asian-Pac-Islander    Male             0             0              50   
+        32534               White  Female             0             0              39   
+        32535               Black    Male             0             0              35   
+        32536               White  Female             0             0              55   
+        32537               Black    Male             0             0              46   
+        32538               Black  Female         15020             0              45   
+        32539               White    Male             0             0              10   
+        32540               White  Female             0             0              40   
+        32541               Black  Female             0             0              32   
+        32542               White    Male             0             0              25   
+        32543               White  Female             0             0              48   
+        32544               Other  Female             0             0              30   
+        32545               White  Female             0             0              20   
+        32546               White  Female             0             0              40   
+        32547               White    Male             0             0              40   
+        32548               White    Male          1086             0              60   
+        32549               White  Female             0             0              40   
+        32550               White    Male             0             0              50   
+        32551  Amer-Indian-Eskimo    Male             0             0              40   
+        32552               White    Male             0             0              45   
+        32553  Asian-Pac-Islander    Male             0             0              11   
+        32554               White    Male             0             0              40   
+        32555               White    Male             0             0              40   
+        32556               White  Female             0             0              38   
+        32557               White    Male             0             0              40   
+        32558               White  Female             0             0              40   
+        32559               White    Male             0             0              20   
+        32560               White  Female         15024             0              40   
+        
+              native-country salary  
+        0      United-States  <=50K  
+        1      United-States  <=50K  
+        2      United-States  <=50K  
+        3      United-States  <=50K  
+        4               Cuba  <=50K  
+        5      United-States  <=50K  
+        6            Jamaica  <=50K  
+        7      United-States   >50K  
+        8      United-States   >50K  
+        9      United-States   >50K  
+        10     United-States   >50K  
+        11             India   >50K  
+        12     United-States  <=50K  
+        13     United-States  <=50K  
+        14                 ?   >50K  
+        15            Mexico  <=50K  
+        16     United-States  <=50K  
+        17     United-States  <=50K  
+        18     United-States  <=50K  
+        19     United-States   >50K  
+        20     United-States   >50K  
+        21     United-States  <=50K  
+        22     United-States  <=50K  
+        23     United-States  <=50K  
+        24     United-States  <=50K  
+        25     United-States   >50K  
+        26     United-States  <=50K  
+        27             South   >50K  
+        28     United-States  <=50K  
+        29     United-States  <=50K  
+        {\ldots}              {\ldots}    {\ldots}  
+        32531  United-States  <=50K  
+        32532  United-States   >50K  
+        32533          Japan   >50K  
+        32534  United-States  <=50K  
+        32535  United-States  <=50K  
+        32536  United-States   >50K  
+        32537  United-States  <=50K  
+        32538  United-States   >50K  
+        32539  United-States   >50K  
+        32540  United-States  <=50K  
+        32541  United-States  <=50K  
+        32542  United-States  <=50K  
+        32543  United-States  <=50K  
+        32544  United-States  <=50K  
+        32545  United-States   >50K  
+        32546  United-States  <=50K  
+        32547         Mexico  <=50K  
+        32548  United-States  <=50K  
+        32549  United-States  <=50K  
+        32550  United-States  <=50K  
+        32551  United-States  <=50K  
+        32552  United-States  <=50K  
+        32553         Taiwan  <=50K  
+        32554  United-States   >50K  
+        32555  United-States  <=50K  
+        32556  United-States  <=50K  
+        32557  United-States   >50K  
+        32558  United-States  <=50K  
+        32559  United-States  <=50K  
+        32560  United-States   >50K  
+        
+        [32561 rows x 15 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}1\PYZhy{}(c)}
+        \PY{n}{adult\PYZus{}df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} (32561, 15)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}1\PYZhy{}(d)}
+        \PY{n}{adult\PYZus{}df} \PY{o}{=} \PY{n}{adult\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fnlwgt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}1\PYZhy{}(e),(f)}
+         \PY{n}{adult\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{adult\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}=50K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{adult\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{adult\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZgt{}50K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}adult\PYZus{}df[\PYZsq{}salary\PYZsq{}] = adult\PYZus{}df[\PYZsq{}salary\PYZsq{}].astype(float)}
+         \PY{n}{adult\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{adult\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{codes}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}1\PYZhy{}(g)}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+         \PY{k+kn}{import} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{as} \PY{n+nn}{cv}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         
+         \PY{n}{y} \PY{o}{=} \PY{n}{adult\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{]}
+         \PY{n}{X} \PY{o}{=} \PY{n}{adult\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{13}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}1\PYZhy{}(g),(h)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X dataframe has shape:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{;}\PY{l+s+s2}{\PYZdq{}} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y dataframe has shape:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+X dataframe has shape: (32561, 13) ;
+y dataframe has shape: (32561,) .
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}1\PYZhy{}(i)}
+         \PY{n}{X\PYZus{}encoded} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{X\PYZus{}encoded}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} (32561, 107)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{y} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+         \PY{n}{y}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} (32561, 1)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}1\PYZhy{}(j)}
+         \PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X\PYZus{}encoded}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} (22792, 107)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} (9769, 107)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} (22792, 1)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} (9769, 1)
+\end{Verbatim}
+            
+    \hypertarget{random-forest-classifier---base-model}{%
+\section{2. Random Forest Classifier - Base
+Model:}\label{random-forest-classifier---base-model}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{}2\PYZhy{}(a) \PYZam{} 2\PYZhy{}(b)}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+         
+         \PY{n}{rnd\PYZus{}clf} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+         \PY{n}{rnd\PYZus{}clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}pred\PYZus{}rf} \PY{o}{=} \PY{n}{rnd\PYZus{}clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred\PYZus{}rf}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/zhongyizhang/env/lib/python3.7/site-packages/sklearn/ensemble/forest.py:245: FutureWarning: The default value of n\_estimators will change from 10 in version 0.20 to 100 in 0.22.
+  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
+/Users/zhongyizhang/env/lib/python3.7/site-packages/ipykernel\_launcher.py:5: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n\_samples,), for example using ravel().
+  """
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} array([0, 1, 1, {\ldots}, 0, 0, 1], dtype=int8)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}2\PYZhy{}(b)}
+         \PY{n}{prob1} \PY{o}{=} \PY{n}{rnd\PYZus{}clf}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)} 
+         \PY{n}{prob1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} array([[1.       , 0.       ],
+                [0.4      , 0.6      ],
+                [0.2      , 0.8      ],
+                {\ldots},
+                [1.       , 0.       ],
+                [0.6452381, 0.3547619],
+                [0.       , 1.       ]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}2\PYZhy{}(c)}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+         \PY{n}{rnd\PYZus{}matrix1} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}rf}\PY{p}{)}
+         \PY{n}{rnd\PYZus{}matrix1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} array([[6847,  608],
+                [ 921, 1393]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{target\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZlt{}= 5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZgt{}  5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}rf}\PY{p}{,} \PY{n}{target\PYZus{}names}\PY{o}{=}\PY{n}{target\PYZus{}names}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+               precision    recall  f1-score   support
+
+salary <= 5k       0.88      0.92      0.90      7455
+salary >  5k       0.70      0.60      0.65      2314
+
+    accuracy                           0.84      9769
+   macro avg       0.79      0.76      0.77      9769
+weighted avg       0.84      0.84      0.84      9769
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{}2\PYZhy{}(d) AUC score}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{roc\PYZus{}auc\PYZus{}score}
+         \PY{n}{rnd\PYZus{}probs} \PY{o}{=} \PY{n}{rnd\PYZus{}clf}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{rnd\PYZus{}probs}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.8689369289780746
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} 2\PYZhy{}(e) Top 5 important features}
+         \PY{k+kn}{from} \PY{n+nn}{xgboost} \PY{k}{import} \PY{n}{plot\PYZus{}importance}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot}
+         
+         \PY{n}{feat\PYZus{}importances0} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{rnd\PYZus{}clf}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{X\PYZus{}encoded}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{n}{feat\PYZus{}importances0}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{barh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The top 5 important features for Random Forest Classifier are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  age
+\item
+  capital-gain
+\item
+  hours-per-week
+\item
+  education-num
+\item
+  relationship\_Husband
+\end{enumerate}
+
+    \hypertarget{f-for-training-set}{%
+\subsection{2-(f) For training set}\label{f-for-training-set}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{y\PYZus{}pred\PYZus{}rf\PYZus{}train} \PY{o}{=} \PY{n}{rnd\PYZus{}clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred\PYZus{}rf\PYZus{}train}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} array([0, 1, 0, {\ldots}, 0, 0, 0], dtype=int8)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{prob12} \PY{o}{=} \PY{n}{rnd\PYZus{}clf}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)} 
+         \PY{n}{prob12}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} array([[0.9  , 0.1  ],
+                [0.1  , 0.9  ],
+                [1.   , 0.   ],
+                {\ldots},
+                [1.   , 0.   ],
+                [0.525, 0.475],
+                [1.   , 0.   ]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{rnd\PYZus{}matrix2} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}rf\PYZus{}train}\PY{p}{)}
+         \PY{n}{rnd\PYZus{}matrix2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} array([[17033,   232],
+                [  465,  5062]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{target\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZlt{}= 5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZgt{}  5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}rf\PYZus{}train}\PY{p}{,} \PY{n}{target\PYZus{}names}\PY{o}{=}\PY{n}{target\PYZus{}names}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+               precision    recall  f1-score   support
+
+salary <= 5k       0.97      0.99      0.98     17265
+salary >  5k       0.96      0.92      0.94      5527
+
+    accuracy                           0.97     22792
+   macro avg       0.96      0.95      0.96     22792
+weighted avg       0.97      0.97      0.97     22792
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{rnd\PYZus{}probs\PYZus{}train} \PY{o}{=} \PY{n}{rnd\PYZus{}clf}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{rnd\PYZus{}probs\PYZus{}train}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.995650407647873
+
+    \end{Verbatim}
+
+    2-(e) The training set accuracy score is 99.57\%, but the testing set
+accuracy score is only 86.89\%. The training set RMSE is much smaller
+than the testing set RMSE. The training set has nearly no error, but the
+testing set has over 13 percent error rates. This model is overfitting.
+
+    \hypertarget{adaboost-classifier---gridsearch}{%
+\section{3. AdaBoost Classifier -
+GridSearch:}\label{adaboost-classifier---gridsearch}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{}3\PYZhy{}(a)}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{GridSearchCV}
+         \PY{n}{param\PYZus{}grid} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}estimators}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{300}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{learning\PYZus{}rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{l+m+mf}{0.6}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{1.2}\PY{p}{]}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{AdaBoostClassifier}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k}{import} \PY{n}{make\PYZus{}classification}
+         
+         \PY{n}{clf\PYZus{}obj} \PY{o}{=} \PY{n}{AdaBoostClassifier}\PY{p}{(}\PY{p}{)}
+         \PY{n}{clf\PYZus{}grid1} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{clf\PYZus{}obj}\PY{p}{,} \PY{n}{param\PYZus{}grid}\PY{p}{,} \PY{n}{cv} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{scoring} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{roc\PYZus{}auc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{refit} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{verbose} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{)}
+         
+         \PY{n}{clf\PYZus{}grid1}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fitting 5 folds for each of 24 candidates, totalling 120 fits
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Parallel(n\_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n\_jobs=-1)]: Done  48 tasks      | elapsed:  1.1min
+[Parallel(n\_jobs=-1)]: Done 120 out of 120 | elapsed:  2.6min finished
+/Users/zhongyizhang/env/lib/python3.7/site-packages/sklearn/utils/validation.py:724: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n\_samples, ), for example using ravel().
+  y = column\_or\_1d(y, warn=True)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} GridSearchCV(cv=5, error\_score='raise-deprecating',
+                      estimator=AdaBoostClassifier(algorithm='SAMME.R',
+                                                   base\_estimator=None,
+                                                   learning\_rate=1.0, n\_estimators=50,
+                                                   random\_state=None),
+                      iid='warn', n\_jobs=-1,
+                      param\_grid=\{'learning\_rate': [0.2, 0.4, 0.6, 0.8, 1, 1.2],
+                                  'n\_estimators': [100, 200, 300, 400]\},
+                      pre\_dispatch='2*n\_jobs', refit=True, return\_train\_score=False,
+                      scoring='roc\_auc', verbose=5)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{}3\PYZhy{}(b)}
+         \PY{n}{clf\PYZus{}grid1}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} \{'learning\_rate': 1.2, 'n\_estimators': 400\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{clf\PYZus{}grid1}\PY{o}{.}\PY{n}{best\PYZus{}estimator\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} AdaBoostClassifier(algorithm='SAMME.R', base\_estimator=None, learning\_rate=1.2,
+                            n\_estimators=400, random\_state=None)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{clf\PYZus{}grid1}\PY{o}{.}\PY{n}{best\PYZus{}score\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} 0.9253192453138157
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{}3\PYZhy{}(b)}
+         \PY{n}{best\PYZus{}clf1} \PY{o}{=} \PY{n}{AdaBoostClassifier}\PY{p}{(}\PY{n}{algorithm}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SAMME.R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{base\PYZus{}estimator}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{p}{,}
+                                        \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{400}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+         \PY{n}{best\PYZus{}clf1}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}pred\PYZus{}best1} \PY{o}{=} \PY{n}{best\PYZus{}clf1}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred\PYZus{}best1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/zhongyizhang/env/lib/python3.7/site-packages/sklearn/utils/validation.py:724: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n\_samples, ), for example using ravel().
+  y = column\_or\_1d(y, warn=True)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} array([0, 1, 1, {\ldots}, 0, 1, 1], dtype=int8)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{prob2} \PY{o}{=} \PY{n}{best\PYZus{}clf1}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)} 
+         \PY{n}{prob2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} array([[0.50235922, 0.49764078],
+                [0.49989469, 0.50010531],
+                [0.49971672, 0.50028328],
+                {\ldots},
+                [0.5027286 , 0.4972714 ],
+                [0.49999487, 0.50000513],
+                [0.49387416, 0.50612584]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{}3\PYZhy{}(c)}
+         \PY{n}{rnd\PYZus{}matrix\PYZus{}best1} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}best1}\PY{p}{)}
+         \PY{n}{rnd\PYZus{}matrix\PYZus{}best1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} array([[7008,  447],
+                [ 807, 1507]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{target\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZlt{}= 5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZgt{}  5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}best1}\PY{p}{,} \PY{n}{target\PYZus{}names}\PY{o}{=}\PY{n}{target\PYZus{}names}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+               precision    recall  f1-score   support
+
+salary <= 5k       0.90      0.94      0.92      7455
+salary >  5k       0.77      0.65      0.71      2314
+
+    accuracy                           0.87      9769
+   macro avg       0.83      0.80      0.81      9769
+weighted avg       0.87      0.87      0.87      9769
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{c+c1}{\PYZsh{}3\PYZhy{}(d) AUC score}
+         \PY{n}{clf\PYZus{}best\PYZus{}probs1} \PY{o}{=} \PY{n}{best\PYZus{}clf1}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{clf\PYZus{}best\PYZus{}probs1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.9244122180504519
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} 3\PYZhy{}(e) Top 5 important features}
+         \PY{k+kn}{from} \PY{n+nn}{xgboost} \PY{k}{import} \PY{n}{plot\PYZus{}importance}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot}
+         
+         \PY{n}{feat\PYZus{}importances1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{best\PYZus{}clf1}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{X\PYZus{}encoded}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{n}{feat\PYZus{}importances1}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{barh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The top 5 important features for AdaBoost Classifier are:\\
+1. capital-gain\\
+2. capital-loss\\
+3. age\\
+4. hours-per-week\\
+5. education-num
+
+    \hypertarget{f-for-training-set}{%
+\subsection{3-(f) For training set}\label{f-for-training-set}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{y\PYZus{}pred\PYZus{}clf\PYZus{}train1} \PY{o}{=} \PY{n}{best\PYZus{}clf1}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred\PYZus{}clf\PYZus{}train1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} array([0, 1, 0, {\ldots}, 0, 0, 0], dtype=int8)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{prob22} \PY{o}{=} \PY{n}{best\PYZus{}clf1}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)} 
+         \PY{n}{prob22}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} array([[0.50126488, 0.49873512],
+                [0.49461247, 0.50538753],
+                [0.50213001, 0.49786999],
+                {\ldots},
+                [0.52713679, 0.47286321],
+                [0.50056402, 0.49943598],
+                [0.50118316, 0.49881684]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{rnd\PYZus{}matrix\PYZus{}best12} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}clf\PYZus{}train1}\PY{p}{)}
+         \PY{n}{rnd\PYZus{}matrix\PYZus{}best12}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:} array([[16247,  1018],
+                [ 1902,  3625]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{target\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZlt{}= 5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZgt{}  5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}clf\PYZus{}train1}\PY{p}{,} \PY{n}{target\PYZus{}names}\PY{o}{=}\PY{n}{target\PYZus{}names}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+               precision    recall  f1-score   support
+
+salary <= 5k       0.90      0.94      0.92     17265
+salary >  5k       0.78      0.66      0.71      5527
+
+    accuracy                           0.87     22792
+   macro avg       0.84      0.80      0.82     22792
+weighted avg       0.87      0.87      0.87     22792
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{clf\PYZus{}probs\PYZus{}train1} \PY{o}{=} \PY{n}{best\PYZus{}clf1}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{clf\PYZus{}probs\PYZus{}train1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.9320490658212577
+
+    \end{Verbatim}
+
+    3-(f) The training set accuracy score is 93.20\%, and the testing set
+accuracy score is 92.44\%. The training set RMSE is almost equal to the
+testing set RMSE. This model is very good. The model is a little bit
+over-fitting but very acceptable. This model is neither over-fitting nor
+under-fitting.
+
+    \hypertarget{gradient-boosting-classifier---gridsearch}{%
+\section{4. Gradient Boosting Classifier -
+GridSearch:}\label{gradient-boosting-classifier---gridsearch}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{}4\PYZhy{}(a)}
+         \PY{n}{param\PYZus{}grid2} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}estimators}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{300}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{learning\PYZus{}rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{1.3}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}depth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{\PYZcb{}}
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{GradientBoostingClassifier}
+         
+         \PY{n}{gbc\PYZus{}obj} \PY{o}{=} \PY{n}{GradientBoostingClassifier}\PY{p}{(}\PY{p}{)}
+         \PY{n}{gbc\PYZus{}grid} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{gbc\PYZus{}obj}\PY{p}{,} \PY{n}{param\PYZus{}grid2}\PY{p}{,} \PY{n}{cv} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{scoring} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{roc\PYZus{}auc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{refit} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{verbose} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{)}
+         
+         \PY{n}{gbc\PYZus{}grid}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fitting 5 folds for each of 24 candidates, totalling 120 fits
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Parallel(n\_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n\_jobs=-1)]: Done  48 tasks      | elapsed:   37.7s
+[Parallel(n\_jobs=-1)]: Done 120 out of 120 | elapsed:  1.5min finished
+/Users/zhongyizhang/env/lib/python3.7/site-packages/sklearn/ensemble/gradient\_boosting.py:1450: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n\_samples, ), for example using ravel().
+  y = column\_or\_1d(y, warn=True)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} GridSearchCV(cv=5, error\_score='raise-deprecating',
+                      estimator=GradientBoostingClassifier(criterion='friedman\_mse',
+                                                           init=None, learning\_rate=0.1,
+                                                           loss='deviance', max\_depth=3,
+                                                           max\_features=None,
+                                                           max\_leaf\_nodes=None,
+                                                           min\_impurity\_decrease=0.0,
+                                                           min\_impurity\_split=None,
+                                                           min\_samples\_leaf=1,
+                                                           min\_samples\_split=2,
+                                                           min\_weight\_fraction\_leaf=0.0,
+                                                           n\_estimators=100,
+                                                           n\_iter\_no\_change=None,
+                                                           presort='auto',
+                                                           random\_state=None,
+                                                           subsample=1.0, tol=0.0001,
+                                                           validation\_fraction=0.1,
+                                                           verbose=0, warm\_start=False),
+                      iid='warn', n\_jobs=-1,
+                      param\_grid=\{'learning\_rate': [0.3, 0.8, 1.3], 'max\_depth': [1, 2],
+                                  'n\_estimators': [100, 200, 300, 400]\},
+                      pre\_dispatch='2*n\_jobs', refit=True, return\_train\_score=False,
+                      scoring='roc\_auc', verbose=5)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{}4\PYZhy{}(b)}
+         \PY{n}{gbc\PYZus{}grid}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} \{'learning\_rate': 0.3, 'max\_depth': 2, 'n\_estimators': 400\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{gbc\PYZus{}grid}\PY{o}{.}\PY{n}{best\PYZus{}estimator\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}50}]:} GradientBoostingClassifier(criterion='friedman\_mse', init=None,
+                                    learning\_rate=0.3, loss='deviance', max\_depth=2,
+                                    max\_features=None, max\_leaf\_nodes=None,
+                                    min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+                                    min\_samples\_leaf=1, min\_samples\_split=2,
+                                    min\_weight\_fraction\_leaf=0.0, n\_estimators=400,
+                                    n\_iter\_no\_change=None, presort='auto',
+                                    random\_state=None, subsample=1.0, tol=0.0001,
+                                    validation\_fraction=0.1, verbose=0,
+                                    warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{gbc\PYZus{}grid}\PY{o}{.}\PY{n}{best\PYZus{}score\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:} 0.928245104546245
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{c+c1}{\PYZsh{}4\PYZhy{}(b)}
+         \PY{n}{best\PYZus{}gbc} \PY{o}{=} \PY{n}{GradientBoostingClassifier}\PY{p}{(}\PY{n}{criterion}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{friedman\PYZus{}mse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{init}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}
+                                               \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deviance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}
+                                               \PY{n}{max\PYZus{}features}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{max\PYZus{}leaf\PYZus{}nodes}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}
+                                               \PY{n}{min\PYZus{}impurity\PYZus{}decrease}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{min\PYZus{}impurity\PYZus{}split}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}
+                                               \PY{n}{min\PYZus{}samples\PYZus{}leaf}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{min\PYZus{}samples\PYZus{}split}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}
+                                               \PY{n}{min\PYZus{}weight\PYZus{}fraction\PYZus{}leaf}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{400}\PY{p}{,}
+                                               \PY{n}{n\PYZus{}iter\PYZus{}no\PYZus{}change}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{presort}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{auto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                               \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{subsample}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{0.0001}\PY{p}{,}
+                                               \PY{n}{validation\PYZus{}fraction}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                                               \PY{n}{warm\PYZus{}start}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{best\PYZus{}gbc}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}pred\PYZus{}best\PYZus{}gbc} \PY{o}{=} \PY{n}{best\PYZus{}gbc}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred\PYZus{}best\PYZus{}gbc}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/zhongyizhang/env/lib/python3.7/site-packages/sklearn/ensemble/gradient\_boosting.py:1450: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n\_samples, ), for example using ravel().
+  y = column\_or\_1d(y, warn=True)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} array([0, 1, 1, {\ldots}, 0, 1, 1], dtype=int8)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{prob\PYZus{}gbc} \PY{o}{=} \PY{n}{best\PYZus{}gbc}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)} 
+         \PY{n}{prob\PYZus{}gbc}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:} array([[0.99376594, 0.00623406],
+                [0.42488407, 0.57511593],
+                [0.3057118 , 0.6942882 ],
+                {\ldots},
+                [0.99403412, 0.00596588],
+                [0.43283001, 0.56716999],
+                [0.00179603, 0.99820397]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{c+c1}{\PYZsh{}4\PYZhy{}(c)}
+         \PY{n}{gbc\PYZus{}matrix\PYZus{}best} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}best\PYZus{}gbc}\PY{p}{)}
+         \PY{n}{gbc\PYZus{}matrix\PYZus{}best}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} array([[7018,  437],
+                [ 796, 1518]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{target\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZlt{}= 5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZgt{}  5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}best\PYZus{}gbc}\PY{p}{,} \PY{n}{target\PYZus{}names}\PY{o}{=}\PY{n}{target\PYZus{}names}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+               precision    recall  f1-score   support
+
+salary <= 5k       0.90      0.94      0.92      7455
+salary >  5k       0.78      0.66      0.71      2314
+
+    accuracy                           0.87      9769
+   macro avg       0.84      0.80      0.82      9769
+weighted avg       0.87      0.87      0.87      9769
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{c+c1}{\PYZsh{}4\PYZhy{}(d) AUC score}
+         \PY{n}{gbc\PYZus{}best\PYZus{}probs} \PY{o}{=} \PY{n}{best\PYZus{}gbc}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{gbc\PYZus{}best\PYZus{}probs}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.9264730996175845
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{c+c1}{\PYZsh{} 4\PYZhy{}(e) Top 5 important features}
+         
+         \PY{n}{feat\PYZus{}importances2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{best\PYZus{}gbc}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{X\PYZus{}encoded}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{n}{feat\PYZus{}importances2}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{barh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_68_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The top 5 important features for Gradient Boosting Classifier are:\\
+1. marital-status\_Married-civ-spouse\\
+2. capital-gain\\
+3. education-num\\
+4. capital-loss\\
+5. age
+
+    \hypertarget{f-for-training-set}{%
+\subsection{4-(f) For training set:}\label{f-for-training-set}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{y\PYZus{}pred\PYZus{}gbc\PYZus{}train} \PY{o}{=} \PY{n}{best\PYZus{}gbc}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred\PYZus{}gbc\PYZus{}train}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:} array([0, 1, 0, {\ldots}, 0, 0, 0], dtype=int8)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{prob\PYZus{}gbc\PYZus{}train} \PY{o}{=} \PY{n}{best\PYZus{}gbc}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)} 
+         \PY{n}{prob\PYZus{}gbc\PYZus{}train}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:} array([[9.90490170e-01, 9.50982989e-03],
+                [1.93307496e-02, 9.80669250e-01],
+                [9.63702932e-01, 3.62970679e-02],
+                {\ldots},
+                [9.99586281e-01, 4.13718890e-04],
+                [6.74637735e-01, 3.25362265e-01],
+                [8.63141878e-01, 1.36858122e-01]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{gbc\PYZus{}matrix\PYZus{}train} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}gbc\PYZus{}train}\PY{p}{)}
+         \PY{n}{gbc\PYZus{}matrix\PYZus{}train}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}60}]:} array([[16377,   888],
+                [ 1736,  3791]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{target\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZlt{}= 5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZgt{}  5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}gbc\PYZus{}train}\PY{p}{,} \PY{n}{target\PYZus{}names}\PY{o}{=}\PY{n}{target\PYZus{}names}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+               precision    recall  f1-score   support
+
+salary <= 5k       0.90      0.95      0.93     17265
+salary >  5k       0.81      0.69      0.74      5527
+
+    accuracy                           0.88     22792
+   macro avg       0.86      0.82      0.83     22792
+weighted avg       0.88      0.88      0.88     22792
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{gbc\PYZus{}probs\PYZus{}train} \PY{o}{=} \PY{n}{best\PYZus{}gbc}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{gbc\PYZus{}probs\PYZus{}train}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.9426378291630099
+
+    \end{Verbatim}
+
+    4-(f) The training set accuracy score is 94.26\%, and the testing set
+accuracy score is 92.65\%. The training set RMSE is almost equal to the
+testing set RMSE. This model is very good. The model is a little bit
+over-fitting but very acceptable. I can conclude that this model is
+neither over-fitting nor under-fitting.
+
+    \hypertarget{xgboost---randomizedsearchcv}{%
+\section{5. XGBoost -
+RandomizedSearchCV}\label{xgboost---randomizedsearchcv}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{c+ch}{\PYZsh{}!pip install xgboost}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{c+c1}{\PYZsh{}5\PYZhy{}(a)}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{n}{param\PYZus{}grid3} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}estimators}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{learning\PYZus{}rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{1.6}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{)}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}depth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gamma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{)}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}
+         
+         \PY{k+kn}{from} \PY{n+nn}{xgboost} \PY{k}{import} \PY{n}{XGBClassifier}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{RandomizedSearchCV}
+         
+         \PY{n}{xgb\PYZus{}obj} \PY{o}{=} \PY{n}{XGBClassifier}\PY{p}{(}\PY{p}{)}
+         \PY{n}{xgb\PYZus{}grid} \PY{o}{=} \PY{n}{RandomizedSearchCV}\PY{p}{(}\PY{n}{xgb\PYZus{}obj}\PY{p}{,} \PY{n}{param\PYZus{}grid3}\PY{p}{,} \PY{n}{cv} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{scoring} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{roc\PYZus{}auc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{refit} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{verbose} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{)}
+         
+         \PY{n}{xgb\PYZus{}grid}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fitting 5 folds for each of 10 candidates, totalling 50 fits
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Parallel(n\_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n\_jobs=-1)]: Done  38 out of  50 | elapsed:  2.6min remaining:   49.3s
+[Parallel(n\_jobs=-1)]: Done  50 out of  50 | elapsed:  3.4min finished
+/Users/zhongyizhang/env/lib/python3.7/site-packages/sklearn/preprocessing/label.py:219: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n\_samples, ), for example using ravel().
+  y = column\_or\_1d(y, warn=True)
+/Users/zhongyizhang/env/lib/python3.7/site-packages/sklearn/preprocessing/label.py:252: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n\_samples, ), for example using ravel().
+  y = column\_or\_1d(y, warn=True)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:} RandomizedSearchCV(cv=5, error\_score='raise-deprecating',
+                            estimator=XGBClassifier(base\_score=0.5, booster='gbtree',
+                                                    colsample\_bylevel=1,
+                                                    colsample\_bynode=1,
+                                                    colsample\_bytree=1, gamma=0,
+                                                    learning\_rate=0.1, max\_delta\_step=0,
+                                                    max\_depth=3, min\_child\_weight=1,
+                                                    missing=None, n\_estimators=100,
+                                                    n\_jobs=1, nthread=None,
+                                                    objective='binary:logistic',
+                                                    random\_state=0, reg\_alpha=0{\ldots}
+                                                                   0.30000000000000004,
+                                                                   0.4, 0.5, 0.6,
+                                                                   0.7000000000000001,
+                                                                   0.8, 0.9, 1.0, 1.1,
+                                                                   1.2000000000000002,
+                                                                   1.3000000000000003,
+                                                                   1.4000000000000001,
+                                                                   1.5000000000000002],
+                                                 'max\_depth': [1, 2],
+                                                 'n\_estimators': [100, 150, 200, 250,
+                                                                  300, 350, 400, 450,
+                                                                  500, 550, 600, 650,
+                                                                  700, 750, 800, 850,
+                                                                  900, 950]\},
+                            pre\_dispatch='2*n\_jobs', random\_state=None, refit=True,
+                            return\_train\_score=False, scoring='roc\_auc', verbose=5)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{c+c1}{\PYZsh{}5\PYZhy{}(b)}
+         \PY{n}{xgb\PYZus{}grid}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:} \{'n\_estimators': 650, 'max\_depth': 1, 'learning\_rate': 0.9, 'gamma': 0.75\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{xgb\PYZus{}grid}\PY{o}{.}\PY{n}{best\PYZus{}estimator\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}66}]:} XGBClassifier(base\_score=0.5, booster='gbtree', colsample\_bylevel=1,
+                       colsample\_bynode=1, colsample\_bytree=1, gamma=0.75,
+                       learning\_rate=0.9, max\_delta\_step=0, max\_depth=1,
+                       min\_child\_weight=1, missing=None, n\_estimators=650, n\_jobs=1,
+                       nthread=None, objective='binary:logistic', random\_state=0,
+                       reg\_alpha=0, reg\_lambda=1, scale\_pos\_weight=1, seed=None,
+                       silent=None, subsample=1, verbosity=1)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{xgb\PYZus{}grid}\PY{o}{.}\PY{n}{best\PYZus{}score\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}67}]:} 0.9250812930028283
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{c+c1}{\PYZsh{}5\PYZhy{}(b)}
+         \PY{n}{best\PYZus{}xgb} \PY{o}{=} \PY{n}{XGBClassifier}\PY{p}{(}\PY{n}{base\PYZus{}score}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{booster}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gbtree}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{colsample\PYZus{}bylevel}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                                  \PY{n}{colsample\PYZus{}bynode}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{colsample\PYZus{}bytree}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{,}
+                                  \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{0.9}\PY{p}{,} \PY{n}{max\PYZus{}delta\PYZus{}step}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                                  \PY{n}{min\PYZus{}child\PYZus{}weight}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{missing}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{650}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                                  \PY{n}{nthread}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{objective}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{binary:logistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                                  \PY{n}{reg\PYZus{}alpha}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{reg\PYZus{}lambda}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{scale\PYZus{}pos\PYZus{}weight}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}
+                                  \PY{n}{silent}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{subsample}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{verbosity}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{best\PYZus{}xgb}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}pred\PYZus{}best\PYZus{}xgb} \PY{o}{=} \PY{n}{best\PYZus{}xgb}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred\PYZus{}best\PYZus{}xgb}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}68}]:} array([0, 1, 1, {\ldots}, 0, 0, 1], dtype=int8)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{prob\PYZus{}xgb} \PY{o}{=} \PY{n}{best\PYZus{}xgb}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)} 
+         \PY{n}{prob\PYZus{}xgb}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:} array([[0.9855728 , 0.01442721],
+                [0.4214331 , 0.5785669 ],
+                [0.41005236, 0.58994764],
+                {\ldots},
+                [0.9927978 , 0.00720218],
+                [0.511082  , 0.488918  ],
+                [0.00131398, 0.998686  ]], dtype=float32)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{c+c1}{\PYZsh{}5\PYZhy{}(c)}
+         \PY{n}{xgb\PYZus{}matrix\PYZus{}best} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}best\PYZus{}xgb}\PY{p}{)}
+         \PY{n}{xgb\PYZus{}matrix\PYZus{}best}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}70}]:} array([[7013,  442],
+                [ 829, 1485]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{target\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZlt{}= 5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZgt{}  5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}best\PYZus{}xgb}\PY{p}{,} \PY{n}{target\PYZus{}names}\PY{o}{=}\PY{n}{target\PYZus{}names}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+               precision    recall  f1-score   support
+
+salary <= 5k       0.89      0.94      0.92      7455
+salary >  5k       0.77      0.64      0.70      2314
+
+    accuracy                           0.87      9769
+   macro avg       0.83      0.79      0.81      9769
+weighted avg       0.86      0.87      0.87      9769
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{c+c1}{\PYZsh{}5\PYZhy{}(d) AUC score}
+         \PY{n}{xgb\PYZus{}best\PYZus{}probs} \PY{o}{=} \PY{n}{best\PYZus{}xgb}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{xgb\PYZus{}best\PYZus{}probs}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.9238064804847524
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{c+c1}{\PYZsh{} 5\PYZhy{}(e) Top 5 important features}
+         
+         \PY{n}{feat\PYZus{}importances3} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{best\PYZus{}xgb}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{X\PYZus{}encoded}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{n}{feat\PYZus{}importances3}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{barh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_88_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The top 5 important features for XGBoost model are:\\
+1. marital-status\_Married-civ-spouse\\
+2. education-num\\
+3. occupation\_Farming-fishing\\
+4. occupation\_Exec-managerial\\
+5. occupation\_Other-service
+
+    \hypertarget{f-for-training-set}{%
+\subsection{5-(f) For training set:}\label{f-for-training-set}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{n}{y\PYZus{}pred\PYZus{}xgb\PYZus{}train} \PY{o}{=} \PY{n}{best\PYZus{}xgb}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred\PYZus{}xgb\PYZus{}train}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}74}]:} array([0, 1, 0, {\ldots}, 0, 0, 0], dtype=int8)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{prob\PYZus{}xgb\PYZus{}train} \PY{o}{=} \PY{n}{best\PYZus{}xgb}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)} 
+         \PY{n}{prob\PYZus{}xgb\PYZus{}train}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:} array([[9.2790115e-01, 7.2098821e-02],
+                [8.7264180e-03, 9.9127358e-01],
+                [9.6816397e-01, 3.1836044e-02],
+                {\ldots},
+                [9.9984431e-01, 1.5568043e-04],
+                [7.1410996e-01, 2.8589004e-01],
+                [9.1150421e-01, 8.8495798e-02]], dtype=float32)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{n}{xgb\PYZus{}matrix\PYZus{}train} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}xgb\PYZus{}train}\PY{p}{)}
+         \PY{n}{xgb\PYZus{}matrix\PYZus{}train}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}76}]:} array([[16304,   961],
+                [ 1956,  3571]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{n}{target\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZlt{}= 5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salary \PYZgt{}  5k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}xgb\PYZus{}train}\PY{p}{,} \PY{n}{target\PYZus{}names}\PY{o}{=}\PY{n}{target\PYZus{}names}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+               precision    recall  f1-score   support
+
+salary <= 5k       0.89      0.94      0.92     17265
+salary >  5k       0.79      0.65      0.71      5527
+
+    accuracy                           0.87     22792
+   macro avg       0.84      0.80      0.81     22792
+weighted avg       0.87      0.87      0.87     22792
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{n}{xgb\PYZus{}probs\PYZus{}train} \PY{o}{=} \PY{n}{best\PYZus{}xgb}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{xgb\PYZus{}probs\PYZus{}train}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.9295029151838714
+
+    \end{Verbatim}
+
+    5-(f) The training set accuracy score is 92.95\%, and the testing set
+accuracy score is 92.38\%. The training set RMSE is almost equal to the
+testing set RMSE. This model is very good. I can conclude that this
+model is neither over-fitting nor under-fitting.
+
+    \hypertarget{moving-into-conceptual-problems}{%
+\section{6. Moving into Conceptual
+Problems:}\label{moving-into-conceptual-problems}}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  What does the alpha parameter represent in AdaBoost? Please refer to
+  chapter 7 of the Hands-On ML book if you are struggling.
+\item
+  In AdaBoost explain how the final predicted class is determined. Be
+  sure to reference the alpha term in your explanation.
+\item
+  In Gradient Boosting, what is the role of the max\_depth parameter?
+  Why is it important to tune on this parameter?
+\item
+  In Part (e) of Steps 2-5 you determined the top 5 predictors across
+  each model. Do any predictors show up in the top 5 predictors for all
+  three models? If so, comment on if this predictor makes sense given
+  what you are attempting to predict. (Note: If you don't have any
+  predictors showing up across all 3 predictors, explain one that shows
+  up in 2 of them).
+\item
+  From the models run in steps 2-5, which performs the best based on the
+  Classification Report? Support your reasoning with evidence from your
+  test data and be sure to share the optimal hyperparameters found from
+  your grid search.
+\item
+  For your best performing model, plot out a ROC curve using your test
+  data. Feel free to use sklearn, matplotlib or any other method in
+  python. Describe what the x-axis \& y-axis of the ROC curve tell us
+  about a classifier.
+\end{enumerate}
+
+    \hypertarget{answers}{%
+\subsubsection{Answers:}\label{answers}}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  α (alpha) is a weight that I apply to each classifier, by the formula
+  that reads 1/2 * ln(1- error / error)
+\end{enumerate}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Adaboost predictions are made by calculating the weighted average of
+  the weak classifiers. Adaboost is referred to as a sequential ensemble
+  method --- ensemble referring to a type of learning that combines
+  several models to improve the final predictive performance.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  classifier with accuracy higher than 50\% results in a positive weight
+  for the classifier (in other words, α \textgreater{} 0 if ε
+  \textless{}= 0.5)\\
+\item
+  classifier with exact 50\% accuracy is 0, and thus, does not
+  contribute to the final prediction\\
+\item
+  errors 0.3 and 0.7 lead to classifier weights with inverse signs.
+\end{enumerate}
+
+I continue the iteration until ``low training error is achieved'' or
+``preset number of weak learners have been added (this is a parameter
+that is under our control)''. I then take the final prediction by adding
+up the weighted prediction(decided by the alpha parameter) of every
+classifier.
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Max\_depth is the maximum depth of a tree. It is used to control
+  over-fitting as higher depth will allow model to learn relations very
+  specific to a particular sample.It should be tuned using CV. The first
+  parameter to tune is max\_depth. This indicates how deep the tree can
+  be. The deeper the tree, the more splits it has and it captures more
+  information about the data. We fit a decision tree with depths ranging
+  from 1 to 32 and plot the training and test auc scores.
+\end{enumerate}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  ``education-num'' is the predictor that appeared at top 5 most
+  important features all four times for the four ``Random Forest
+  Classifier'', ``Adaboost'', ``Gradient Boosting'', and ``XGBoost''
+  models. This is reasonable. Education is one of the most important
+  factor that could lead one person to succeed in the future or not.
+  College-educated people are easier to obtain a job compared with
+  people doesn't have a college degree. People with advanced education
+  degree may easily participate in some technical jobs with high
+  salaries. This is very reasonable that education is one of the most
+  important feature by analyzing the data with three boosting models.
+  All the models come with the same idea on the ``education-num''
+  feature.
+\end{enumerate}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  According to the classification report, all three models give very
+  good prediction accuracy on the people group with salaries lower than
+  50k but poor prediction accuracies on the people group with salaries
+  higher than 50k.
+\end{enumerate}
+
+The training set accuracy score is 99.57\%, but the testing set accuracy
+score is only 86.89\% for Random Forest.\\
+The training set accuracy score is 93.20\%, and the testing set accuracy
+score is 92.44\% for Adaboost model.\\
+The training set accuracy score is 94.26\%, and the testing set accuracy
+score is 92.65\% for GradientBoosting model.\\
+The training set accuracy score is 92.95\%, and the testing set accuracy
+score is 92.38\% for XGBoost model.
+
+According to the model accuracy and RMSE, the XGBoost model has the
+smallest RMSE difference between training set and testing set. This
+model is the least overfitting or underfitting model. This model's
+variance and bias are relatively balance compared with all other
+boosting models. The GradientBoosting model's parameter is given by
+myself, and this could make some errors. Although the XGBoost model
+chooses to use the RandomSearch, it still tries tons of parameters. This
+could also be a reason why XGBoost model gives the best performance.
+However, according to model performances, I would choose the XGBoost
+model from question 5 to be the best model. This model should be able to
+fit new data coming into the model well since the training RMSE is
+almost equal to the testing RMSE. This model has the least variance
+compared with all other models
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{5}
+\item
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{xgb\PYZus{}best\PYZus{}probs} \PY{o}{=} \PY{n}{best\PYZus{}xgb}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{xgb\PYZus{}best\PYZus{}probs}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.9238064804847524
+
+    \end{Verbatim}
+
+    \hypertarget{two-ways-to-build-the-roc-curve}{%
+\subsubsection{Two ways to build the roc
+curve}\label{two-ways-to-build-the-roc-curve}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{roc\PYZus{}curve}\PY{p}{,} \PY{n}{auc}\PY{p}{,}\PY{n}{recall\PYZus{}score}\PY{p}{,}\PY{n}{precision\PYZus{}score}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         
+         \PY{n}{fpr}\PY{p}{,} \PY{n}{tpr}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{roc\PYZus{}curve}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}best\PYZus{}xgb}\PY{p}{)}
+         \PY{n}{roc\PYZus{}auc} \PY{o}{=} \PY{n}{auc}\PY{p}{(}\PY{n}{fpr}\PY{p}{,} \PY{n}{tpr}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}xgb.plot\PYZus{}importance(gbm)}
+         \PY{c+c1}{\PYZsh{}plt.show()}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{lw} \PY{o}{=} \PY{l+m+mi}{2}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{fpr}\PY{p}{,} \PY{n}{tpr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{darkorange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{n}{lw}\PY{o}{=}\PY{n}{lw}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ROC curve (area = }\PY{l+s+si}{\PYZpc{}0.2f}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{roc\PYZus{}auc}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{navy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{n}{lw}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.02}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.05}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{False Positive Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True Positive Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ROC curve}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lower right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_108_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+         \PY{k}{def} \PY{n+nf}{buildROC}\PY{p}{(}\PY{n}{target\PYZus{}test}\PY{p}{,}\PY{n}{test\PYZus{}preds}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fpr}\PY{p}{,} \PY{n}{tpr}\PY{p}{,} \PY{n}{threshold} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{roc\PYZus{}curve}\PY{p}{(}\PY{n}{target\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}preds}\PY{p}{)}
+             \PY{n}{roc\PYZus{}auc} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{auc}\PY{p}{(}\PY{n}{fpr}\PY{p}{,} \PY{n}{tpr}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Receiver Operating Characteristic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{fpr}\PY{p}{,} \PY{n}{tpr}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AUC = }\PY{l+s+si}{\PYZpc{}0.2f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{roc\PYZus{}auc}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lower right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True Positive Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{False Positive Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{gcf}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{roc.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{buildROC}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}best\PYZus{}xgb}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_109_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The X-axis is the false positive rate, and the y-axis is the true
+positive rate.\\
+y-axis: The True Positive Rate is the sensitivity, which is equal to the
+True Positive / (True Positive+ False Negative) = 1-False Negative
+Rate.\\
+x-axis: The True Negative Rate is equal to True Negative / (True
+Negative+ False Positive) = 1 - False Positive Rate\\
+A Receiver Operator Characteristic (ROC) curve is a graphical plot used
+to show the diagnostic ability of binary classifiers. It was first used
+in signal detection theory but is now used in many other areas such as
+medicine, radiology, natural hazards and machine learning. The ROC curve
+shows the trade-off between sensitivity (or TPR) and specificity (1 --
+FPR). Classifiers that give curves closer to the top-left corner
+indicate a better performance. As a baseline, a random classifier is
+expected to give points lying along the diagonal (FPR = TPR). The closer
+the curve comes to the 45-degree diagonal of the ROC space, the less
+accurate the test. Note that the ROC does not depend on the class
+distribution. This makes it useful for evaluating classifiers predicting
+rare events such as diseases or disasters. In contrast, evaluating
+performance using accuracy (TP + TN)/(TP + TN + FN + FP) would favor
+classifiers that always predict a negative outcome for rare events.
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

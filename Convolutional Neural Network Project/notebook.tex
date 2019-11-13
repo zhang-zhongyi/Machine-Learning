@@ -1,0 +1,1730 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ML Assignment 8}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{machine-learning-and-predictive-analytics}{%
+\section{Machine Learning and Predictive
+Analytics}\label{machine-learning-and-predictive-analytics}}
+
+\hypertarget{assignment-8}{%
+\section{Assignment 8}\label{assignment-8}}
+
+    Name: Troy Zhongyi Zhang\\
+Netid: zhongyiz@uchicago.edu
+
+    \hypertarget{convolutional-neural-network-classification}{%
+\section{Convolutional Neural Network \&
+Classification:}\label{convolutional-neural-network-classification}}
+
+The objective is to build an image classifier that is capable of
+properly identifying four different categories of image.
+
+The data consists of various train and test samples across the four
+categories of image. You will notice that the data for a specific
+category is a singular image that has been flipped, rotated, or slightly
+altered in some way.
+
+You can use the keras package to solve this problem (https://keras.io/).
+
+Data for HW: Note that each file is a zip
+
+dataset\_train.zip
+
+dataset\_test.zip
+
+    \hypertarget{data-processing}{%
+\section{1. Data Processing:}\label{data-processing}}
+
+The train \& test data is pretty clean in terms of image data, but we
+will need to do a bit of prep work to use in our model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} 1 \PYZhy{} (a)}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{preprocessing}\PY{n+nn}{.}\PY{n+nn}{image} \PY{k}{import} \PY{n}{ImageDataGenerator}
+        \PY{n}{train\PYZus{}datagen} \PY{o}{=} \PY{n}{ImageDataGenerator}\PY{p}{(}\PY{n}{rescale} \PY{o}{=} \PY{l+m+mf}{1.}\PY{o}{/}\PY{l+m+mi}{255}\PY{p}{,}
+                                           \PY{n}{shear\PYZus{}range} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,}
+                                           \PY{n}{zoom\PYZus{}range} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,}
+                                           \PY{n}{horizontal\PYZus{}flip}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} 1 \PYZhy{} (b)}
+        \PY{n}{train\PYZus{}generator} \PY{o}{=} \PY{n}{train\PYZus{}datagen}\PY{o}{.}\PY{n}{flow\PYZus{}from\PYZus{}directory}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/Users/zhongyizhang/Desktop/dataset\PYZus{}train/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                            \PY{n}{target\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{)}\PY{p}{,}
+                                                            \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{,}
+                                                            \PY{n}{class\PYZus{}mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Found 88 images belonging to 4 classes.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{c+c1}{\PYZsh{} x, y = train\PYZus{}generator.next()}
+         \PY{c+c1}{\PYZsh{} for i in range(0,1):}
+         \PY{c+c1}{\PYZsh{}     image = x[i]}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}     print image}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{train\PYZus{}generator}\PY{o}{.}\PY{n}{target\PYZus{}size}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(64, 64)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{train\PYZus{}generator}\PY{o}{.}\PY{n}{classes}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3
+ 3 3 3 3 3 3 3 3 3 3 3 3 3 3]
+
+    \end{Verbatim}
+
+    1 - (c)\\
+The image shape of each training observation is (64, 64, 3).\\
+There are 4 classes in total we need to predict on.
+
+    \hypertarget{initial-classifier-build}{%
+\section{2. Initial Classifier Build:}\label{initial-classifier-build}}
+
+Now use keras to build an initial image classifier with the following
+specifications.
+
+Note: If you get lost, there is great documentation online and homework
+7 included details on many of the layers used here.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Sequential}
+        \PY{n}{classifier} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+WARNING: Logging before flag parsing goes to stderr.
+W0829 02:24:52.988091 4380124608 deprecation\_wrapper.py:119] From /Users/zhongyizhang/env/lib/python3.7/site-packages/keras/backend/tensorflow\_backend.py:74: The name tf.get\_default\_graph is deprecated. Please use tf.compat.v1.get\_default\_graph instead.
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{convolutional} \PY{k}{import} \PY{n}{Conv2D}
+        \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters} \PY{o}{=} \PY{l+m+mi}{32}\PY{p}{,}
+                              \PY{n}{kernel\PYZus{}size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+                              \PY{n}{input\PYZus{}shape} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+                              \PY{n}{activation} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+W0829 02:24:53.237788 4380124608 deprecation\_wrapper.py:119] From /Users/zhongyizhang/env/lib/python3.7/site-packages/keras/backend/tensorflow\_backend.py:517: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+
+W0829 02:24:53.240657 4380124608 deprecation\_wrapper.py:119] From /Users/zhongyizhang/env/lib/python3.7/site-packages/keras/backend/tensorflow\_backend.py:4138: The name tf.random\_uniform is deprecated. Please use tf.random.uniform instead.
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{convolutional} \PY{k}{import} \PY{n}{MaxPooling2D}
+        \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{n}{pool\PYZus{}size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+W0829 02:24:53.993311 4380124608 deprecation\_wrapper.py:119] From /Users/zhongyizhang/env/lib/python3.7/site-packages/keras/backend/tensorflow\_backend.py:3976: The name tf.nn.max\_pool is deprecated. Please use tf.nn.max\_pool2d instead.
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters} \PY{o}{=} \PY{l+m+mi}{64}\PY{p}{,}
+                              \PY{n}{kernel\PYZus{}size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+                              \PY{n}{activation} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{n}{pool\PYZus{}size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Flatten}
+         \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Flatten}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}
+         \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{units} \PY{o}{=} \PY{l+m+mi}{128}\PY{p}{,}
+                              \PY{n}{activation} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{units} \PY{o}{=} \PY{l+m+mi}{4}\PY{p}{,}
+                              \PY{n}{activation} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{classifier}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{adam}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                            \PY{n}{metrics} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+W0829 02:24:55.228575 4380124608 deprecation\_wrapper.py:119] From /Users/zhongyizhang/env/lib/python3.7/site-packages/keras/optimizers.py:790: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+W0829 02:24:55.251175 4380124608 deprecation\_wrapper.py:119] From /Users/zhongyizhang/env/lib/python3.7/site-packages/keras/backend/tensorflow\_backend.py:3295: The name tf.log is deprecated. Please use tf.math.log instead.
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{classifier}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+conv2d\_1 (Conv2D)            (None, 62, 62, 32)        896       
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_1 (MaxPooling2 (None, 31, 31, 32)        0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_2 (Conv2D)            (None, 29, 29, 64)        18496     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_2 (MaxPooling2 (None, 14, 14, 64)        0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+flatten\_1 (Flatten)          (None, 12544)             0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_1 (Dense)              (None, 128)               1605760   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_2 (Dense)              (None, 4)                 516       
+=================================================================
+Total params: 1,625,668
+Trainable params: 1,625,668
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+    \end{Verbatim}
+
+    \hypertarget{model-runs}{%
+\section{3. Model Runs:}\label{model-runs}}
+
+This will be run various times with different numbers of
+steps\_per\_epoch and epochs.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} 3\PYZhy{}(a)}
+         \PY{k+kn}{import} \PY{n+nn}{copy}
+         \PY{n}{classifier0} \PY{o}{=} \PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n}{classifier}\PY{p}{)}
+         \PY{n}{classifier0}\PY{o}{.}\PY{n}{fit\PYZus{}generator}\PY{p}{(}\PY{n}{generator}\PY{o}{=}\PY{n}{train\PYZus{}generator}\PY{p}{,} \PY{n}{steps\PYZus{}per\PYZus{}epoch}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} 
+                                   \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+W0829 02:24:56.576539 4380124608 deprecation\_wrapper.py:119] From /Users/zhongyizhang/env/lib/python3.7/site-packages/keras/backend/tensorflow\_backend.py:174: The name tf.get\_default\_session is deprecated. Please use tf.compat.v1.get\_default\_session instead.
+
+W0829 02:24:56.898655 4380124608 deprecation.py:323] From /Users/zhongyizhang/env/lib/python3.7/site-packages/tensorflow/python/ops/math\_grad.py:1250: add\_dispatch\_support.<locals>.wrapper (from tensorflow.python.ops.array\_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.where in 2.0, which has the same broadcast rule as np.where
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/10
+10/10 [==============================] - 4s 355ms/step - loss: 1.1344 - acc: 0.6546
+Epoch 2/10
+10/10 [==============================] - 4s 354ms/step - loss: 0.2519 - acc: 0.9583
+Epoch 3/10
+10/10 [==============================] - 4s 364ms/step - loss: 0.1131 - acc: 0.9625
+Epoch 4/10
+10/10 [==============================] - 4s 371ms/step - loss: 0.0454 - acc: 0.9865
+Epoch 5/10
+10/10 [==============================] - 4s 356ms/step - loss: 0.0341 - acc: 0.9927
+Epoch 6/10
+10/10 [==============================] - 4s 355ms/step - loss: 0.0116 - acc: 1.0000
+Epoch 7/10
+10/10 [==============================] - 4s 370ms/step - loss: 0.0140 - acc: 0.9959
+Epoch 8/10
+10/10 [==============================] - 4s 362ms/step - loss: 0.0107 - acc: 0.9959
+Epoch 9/10
+10/10 [==============================] - 4s 364ms/step - loss: 0.0083 - acc: 0.9959
+Epoch 10/10
+10/10 [==============================] - 3s 350ms/step - loss: 0.0042 - acc: 0.9969
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} <keras.callbacks.History at 0x13de6b610>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} import os, glob}
+         \PY{c+c1}{\PYZsh{} import numpy as np}
+         \PY{c+c1}{\PYZsh{} from keras.models import model\PYZus{}from\PYZus{}yaml}
+         \PY{c+c1}{\PYZsh{} from keras.preprocessing import image}
+         
+         \PY{c+c1}{\PYZsh{} image\PYZus{}dir = \PYZsq{}/Users/zhongyizhang/Desktop/dataset\PYZus{}test/\PYZsq{}}
+         \PY{c+c1}{\PYZsh{} data\PYZus{}path = os.path.join()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} 3\PYZhy{}(b)}
+         \PY{c+c1}{\PYZsh{} write model and model weights to disk}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{model\PYZus{}from\PYZus{}yaml}
+         \PY{n}{model\PYZus{}yaml} \PY{o}{=} \PY{n}{classifier0}\PY{o}{.}\PY{n}{to\PYZus{}yaml}\PY{p}{(}\PY{p}{)}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model\PYZus{}1.yaml}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{yaml\PYZus{}file}\PY{p}{:}
+             \PY{n}{yaml\PYZus{}file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{model\PYZus{}yaml}\PY{p}{)}
+             \PY{n}{classifier0}\PY{o}{.}\PY{n}{save\PYZus{}weights}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model\PYZus{}1.h5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Saved model to disk}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saved model to disk
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} 3\PYZhy{}(c)}
+         \PY{k+kn}{import} \PY{n+nn}{os}\PY{o}{,} \PY{n+nn}{glob}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{model\PYZus{}from\PYZus{}yaml}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{image}
+         
+         \PY{c+c1}{\PYZsh{} load model from disk}
+         \PY{n}{yaml\PYZus{}file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{model\PYZus{}1.yaml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{loaded\PYZus{}model\PYZus{}yaml} \PY{o}{=} \PY{n}{yaml\PYZus{}file}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+         \PY{n}{yaml\PYZus{}file}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model} \PY{o}{=} \PY{n}{model\PYZus{}from\PYZus{}yaml}\PY{p}{(}\PY{n}{loaded\PYZus{}model\PYZus{}yaml}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} load weights into new model}
+         \PY{n}{model}\PY{o}{.}\PY{n}{load\PYZus{}weights}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model\PYZus{}1.h5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Loaded model from disk}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} test data path}
+         \PY{n}{img\PYZus{}dir} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Users/zhongyizhang/Desktop/dataset\PYZus{}test/}\PY{l+s+s2}{\PYZdq{}} \PY{c+c1}{\PYZsh{} Enter Directory of all images}
+         
+         \PY{c+c1}{\PYZsh{} iterate over each test image}
+         \PY{c+c1}{\PYZsh{} make a prediction and add to results }
+         \PY{n}{data\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{img\PYZus{}dir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{files} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{n}{data\PYZus{}path}\PY{p}{)}
+         \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{f1} \PY{o+ow}{in} \PY{n}{files}\PY{p}{:}
+             \PY{n}{img} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{load\PYZus{}img}\PY{p}{(}\PY{n}{f1}\PY{p}{,} \PY{n}{target\PYZus{}size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{)}\PY{p}{)}
+             \PY{n}{img} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{img\PYZus{}to\PYZus{}array}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             \PY{n}{img} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             \PY{n}{result} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             \PY{n}{r} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{result}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{results}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{r}\PY{p}{)}
+         
+         \PY{n}{results}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/zhongyizhang/env/lib/python3.7/site-packages/keras/engine/saving.py:473: YAMLLoadWarning: calling yaml.load() without Loader={\ldots} is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  config = yaml.load(yaml\_string)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Loaded model from disk
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} [array([3]),
+          array([0]),
+          array([0]),
+          array([0]),
+          array([1]),
+          array([2]),
+          array([1]),
+          array([1])]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{train\PYZus{}generator}\PY{o}{.}\PY{n}{class\PYZus{}indices}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} \{'category 1': 0, 'category 2': 1, 'category 3': 2, 'category 4': 3\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{result\PYZus{}list1} \PY{o}{=} \PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} 
+                         \PY{n+nb}{str}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} 
+                         \PY{n+nb}{str}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} 3\PYZhy{}(d)}
+         \PY{k+kn}{from} \PY{n+nn}{tabulate} \PY{k}{import} \PY{n}{tabulate}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{tabulate}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1022.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{result\PYZus{}list1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} 
+                         \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1053.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{result\PYZus{}list1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{,} 
+                         \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4011.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{result\PYZus{}list1}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{,} 
+                         \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4053.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{result\PYZus{}list1}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{,} 
+                         \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{6023.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{result\PYZus{}list1}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{]}\PY{p}{,} 
+                         \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{6051.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{result\PYZus{}list1}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{]}\PY{p}{,} 
+                         \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C014.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{result\PYZus{}list1}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{]}\PY{p}{,} 
+                         \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C033.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{result\PYZus{}list1}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                         \PY{n}{headers} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{File Nmae}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Real Category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predict Category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+File Nmae      Real Category    Predict Category
+-----------  ---------------  ------------------
+1022.png                   0                   3
+1053.png                   0                   0
+4011.png                   2                   0
+4053.png                   2                   0
+6023.png                   1                   1
+6051.png                   1                   2
+C014.png                   3                   1
+C033.png                   3                   1
+
+    \end{Verbatim}
+
+    From the dataset\_test folder and what I observed, I see:\\
+file\_name real pred\\
+1022.png - 0 - 3\\
+1053.png - 0 - 0\\
+4011.png - 2 - 0\\
+4053.png - 2 - 0\\
+6023.png - 1 - 1\\
+6051.png - 1 - 2\\
+C014.png - 3 - 1\\
+C033.png - 3 - 1\\
+\#\#\#\# The classifier model I created correctly predicted 1053.png and
+6023.png. The accuracy is 2/8 = 1/4 = 0.25 = 25\%. The accuracy for
+``steps\_per\_epoch = 10 and epochs = 10'' is 25\%.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} To test (steps\PYZus{}per\PYZus{}epoch: 30, epochs: 30) independently.}
+         \PY{k+kn}{import} \PY{n+nn}{copy}
+         \PY{n}{classifier00} \PY{o}{=} \PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n}{classifier}\PY{p}{)}
+         \PY{n}{classifier00}\PY{o}{.}\PY{n}{fit\PYZus{}generator}\PY{p}{(}\PY{n}{generator}\PY{o}{=}\PY{n}{train\PYZus{}generator}\PY{p}{,} \PY{n}{steps\PYZus{}per\PYZus{}epoch}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} 
+                                    \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/30
+30/30 [==============================] - 11s 352ms/step - loss: 0.3948 - acc: 0.8628
+Epoch 2/30
+30/30 [==============================] - 11s 357ms/step - loss: 0.0373 - acc: 0.9885
+Epoch 3/30
+30/30 [==============================] - 11s 356ms/step - loss: 0.0074 - acc: 1.0000
+Epoch 4/30
+30/30 [==============================] - 10s 349ms/step - loss: 0.0198 - acc: 0.9951
+Epoch 5/30
+30/30 [==============================] - 11s 353ms/step - loss: 0.0034 - acc: 1.0000
+Epoch 6/30
+30/30 [==============================] - 10s 349ms/step - loss: 0.0019 - acc: 1.0000
+Epoch 7/30
+30/30 [==============================] - 10s 349ms/step - loss: 4.7242e-04 - acc: 1.0000
+Epoch 8/30
+30/30 [==============================] - 10s 346ms/step - loss: 2.0162e-04 - acc: 1.0000
+Epoch 9/30
+30/30 [==============================] - 10s 345ms/step - loss: 1.4430e-04 - acc: 1.0000
+Epoch 10/30
+30/30 [==============================] - 10s 348ms/step - loss: 1.0929e-04 - acc: 1.0000
+Epoch 11/30
+30/30 [==============================] - 10s 348ms/step - loss: 8.7987e-05 - acc: 1.0000
+Epoch 12/30
+30/30 [==============================] - 10s 344ms/step - loss: 1.0122e-04 - acc: 1.0000
+Epoch 13/30
+30/30 [==============================] - 10s 345ms/step - loss: 7.9664e-05 - acc: 1.0000
+Epoch 14/30
+30/30 [==============================] - 10s 345ms/step - loss: 5.0549e-05 - acc: 1.0000
+Epoch 15/30
+30/30 [==============================] - 10s 346ms/step - loss: 5.5300e-05 - acc: 1.0000
+Epoch 16/30
+30/30 [==============================] - 10s 343ms/step - loss: 3.4698e-04 - acc: 1.0000
+Epoch 17/30
+30/30 [==============================] - 10s 345ms/step - loss: 9.9615e-05 - acc: 1.0000
+Epoch 18/30
+30/30 [==============================] - 10s 347ms/step - loss: 6.6331e-05 - acc: 1.0000
+Epoch 19/30
+30/30 [==============================] - 10s 346ms/step - loss: 3.0334e-05 - acc: 1.0000
+Epoch 20/30
+30/30 [==============================] - 10s 342ms/step - loss: 2.2879e-04 - acc: 1.0000
+Epoch 21/30
+30/30 [==============================] - 10s 346ms/step - loss: 6.2740e-05 - acc: 1.0000
+Epoch 22/30
+30/30 [==============================] - 10s 344ms/step - loss: 3.4785e-05 - acc: 1.0000
+Epoch 23/30
+30/30 [==============================] - 10s 342ms/step - loss: 3.2958e-05 - acc: 1.0000
+Epoch 24/30
+30/30 [==============================] - 10s 344ms/step - loss: 2.6901e-05 - acc: 1.0000
+Epoch 25/30
+30/30 [==============================] - 10s 341ms/step - loss: 2.8087e-05 - acc: 1.0000
+Epoch 26/30
+30/30 [==============================] - 10s 345ms/step - loss: 3.3923e-05 - acc: 1.0000
+Epoch 27/30
+30/30 [==============================] - 10s 348ms/step - loss: 1.2491e-05 - acc: 1.0000
+Epoch 28/30
+30/30 [==============================] - 10s 344ms/step - loss: 2.0892e-05 - acc: 1.0000
+Epoch 29/30
+30/30 [==============================] - 10s 343ms/step - loss: 1.2718e-05 - acc: 1.0000
+Epoch 30/30
+30/30 [==============================] - 10s 344ms/step - loss: 2.2603e-05 - acc: 1.0000
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} <keras.callbacks.History at 0x13dddaa50>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{img\PYZus{}dir} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Users/zhongyizhang/Desktop/dataset\PYZus{}test/}\PY{l+s+s2}{\PYZdq{}} \PY{c+c1}{\PYZsh{} Enter Directory of all images}
+         
+         \PY{c+c1}{\PYZsh{} iterate over each test image}
+         \PY{c+c1}{\PYZsh{} make a prediction and add to results }
+         \PY{n}{data\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{img\PYZus{}dir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{files} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{n}{data\PYZus{}path}\PY{p}{)}
+         \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{f1} \PY{o+ow}{in} \PY{n}{files}\PY{p}{:}
+             \PY{n}{img} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{load\PYZus{}img}\PY{p}{(}\PY{n}{f1}\PY{p}{,} \PY{n}{target\PYZus{}size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{)}\PY{p}{)}
+             \PY{n}{img} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{img\PYZus{}to\PYZus{}array}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             \PY{n}{img} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             \PY{n}{result} \PY{o}{=} \PY{n}{classifier00}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             \PY{n}{r} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{result}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{results}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{r}\PY{p}{)}
+         
+         \PY{n}{results}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} [array([3]),
+          array([0]),
+          array([0]),
+          array([0]),
+          array([1]),
+          array([2]),
+          array([1]),
+          array([1])]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} 3\PYZhy{}(e) from here}
+         \PY{n}{step\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{]}
+         \PY{n}{epoch\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{]}
+         \PY{n}{result\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r9}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} step\PYZus{}list = [2, 10]}
+         \PY{c+c1}{\PYZsh{} epoch\PYZus{}list = [10, 2]}
+         \PY{c+c1}{\PYZsh{} result\PYZus{}list = [\PYZsq{}r1\PYZsq{}, \PYZsq{}r2\PYZsq{}]}
+         \PY{c+c1}{\PYZsh{} range\PYZus{}l = [1, 2]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{step\PYZus{}list}\PY{p}{,} \PY{n}{epoch\PYZus{}list}\PY{p}{,} \PY{n}{result\PYZus{}list}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{classifier1} \PY{o}{=} \PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n}{classifier}\PY{p}{)}
+             \PY{n}{classifier1}\PY{o}{.}\PY{n}{fit\PYZus{}generator}\PY{p}{(}\PY{n}{generator}\PY{o}{=}\PY{n}{train\PYZus{}generator}\PY{p}{,} \PY{n}{steps\PYZus{}per\PYZus{}epoch}\PY{o}{=}\PY{n}{i}\PY{p}{,} 
+                                       \PY{n}{epochs}\PY{o}{=}\PY{n}{j}\PY{p}{)}
+             \PY{n}{img\PYZus{}dir} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Users/zhongyizhang/Desktop/dataset\PYZus{}test/}\PY{l+s+s2}{\PYZdq{}} \PY{c+c1}{\PYZsh{} Enter Directory of all images}
+         
+             \PY{n}{data\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{img\PYZus{}dir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{files} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{n}{data\PYZus{}path}\PY{p}{)}
+             \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{k} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{f1} \PY{o+ow}{in} \PY{n}{files}\PY{p}{:}
+                 \PY{n}{img} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{load\PYZus{}img}\PY{p}{(}\PY{n}{f1}\PY{p}{,} \PY{n}{target\PYZus{}size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{img} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{img\PYZus{}to\PYZus{}array}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+                 \PY{n}{img} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+                 \PY{n}{result} \PY{o}{=} \PY{n}{classifier1}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+                 \PY{n}{r} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{result}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{k}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{r}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{result\PYZus{}list}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{l}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{k}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/20
+10/10 [==============================] - 4s 351ms/step - loss: 0.8812 - acc: 0.6895
+Epoch 2/20
+10/10 [==============================] - 3s 331ms/step - loss: 0.2196 - acc: 0.9220
+Epoch 3/20
+10/10 [==============================] - 4s 355ms/step - loss: 0.0990 - acc: 0.9688
+Epoch 4/20
+10/10 [==============================] - 4s 353ms/step - loss: 0.0281 - acc: 0.9937
+Epoch 5/20
+10/10 [==============================] - 4s 354ms/step - loss: 0.0301 - acc: 0.9886
+Epoch 6/20
+10/10 [==============================] - 3s 349ms/step - loss: 0.0214 - acc: 0.9928
+Epoch 7/20
+10/10 [==============================] - 3s 347ms/step - loss: 0.0185 - acc: 0.9877
+Epoch 8/20
+10/10 [==============================] - 3s 344ms/step - loss: 0.0057 - acc: 1.0000
+Epoch 9/20
+10/10 [==============================] - 4s 353ms/step - loss: 0.0028 - acc: 1.0000
+Epoch 10/20
+10/10 [==============================] - 4s 353ms/step - loss: 0.0086 - acc: 0.9937
+Epoch 11/20
+10/10 [==============================] - 3s 342ms/step - loss: 0.0041 - acc: 0.9968
+Epoch 12/20
+10/10 [==============================] - 4s 360ms/step - loss: 3.9504e-04 - acc: 1.0000
+Epoch 13/20
+10/10 [==============================] - 4s 361ms/step - loss: 8.0722e-04 - acc: 1.0000
+Epoch 14/20
+10/10 [==============================] - 4s 357ms/step - loss: 8.3372e-04 - acc: 1.0000
+Epoch 15/20
+10/10 [==============================] - 4s 365ms/step - loss: 8.8823e-04 - acc: 1.0000
+Epoch 16/20
+10/10 [==============================] - 4s 370ms/step - loss: 7.5331e-04 - acc: 1.0000
+Epoch 17/20
+10/10 [==============================] - 3s 347ms/step - loss: 3.7843e-04 - acc: 1.0000
+Epoch 18/20
+10/10 [==============================] - 4s 360ms/step - loss: 2.7034e-04 - acc: 1.0000
+Epoch 19/20
+10/10 [==============================] - 4s 359ms/step - loss: 1.4448e-04 - acc: 1.0000
+Epoch 20/20
+10/10 [==============================] - 4s 352ms/step - loss: 2.6617e-04 - acc: 1.0000
+result\_list 2 = [array([3]), array([0]), array([0]), array([0]), array([1]), array([2]), array([1]), array([1])]
+Epoch 1/30
+10/10 [==============================] - 4s 359ms/step - loss: 0.8240 - acc: 0.7110
+Epoch 2/30
+10/10 [==============================] - 4s 353ms/step - loss: 0.1602 - acc: 0.9549
+Epoch 3/30
+10/10 [==============================] - 4s 359ms/step - loss: 0.0747 - acc: 0.9761
+Epoch 4/30
+10/10 [==============================] - 4s 363ms/step - loss: 0.0434 - acc: 0.9824
+Epoch 5/30
+10/10 [==============================] - 4s 354ms/step - loss: 0.0167 - acc: 0.9927
+Epoch 6/30
+10/10 [==============================] - 4s 357ms/step - loss: 0.0153 - acc: 0.9959
+Epoch 7/30
+10/10 [==============================] - 4s 363ms/step - loss: 0.0224 - acc: 0.9969
+Epoch 8/30
+10/10 [==============================] - 4s 358ms/step - loss: 0.0068 - acc: 1.0000
+Epoch 9/30
+10/10 [==============================] - 4s 355ms/step - loss: 0.0042 - acc: 1.0000
+Epoch 10/30
+10/10 [==============================] - 4s 359ms/step - loss: 0.0080 - acc: 0.9969
+Epoch 11/30
+10/10 [==============================] - 3s 349ms/step - loss: 0.0027 - acc: 1.0000
+Epoch 12/30
+10/10 [==============================] - 4s 359ms/step - loss: 0.0017 - acc: 1.0000
+Epoch 13/30
+10/10 [==============================] - 4s 355ms/step - loss: 8.9776e-04 - acc: 1.0000
+Epoch 14/30
+10/10 [==============================] - 3s 346ms/step - loss: 8.5575e-04 - acc: 1.0000
+Epoch 15/30
+10/10 [==============================] - 4s 356ms/step - loss: 6.2341e-04 - acc: 1.0000
+Epoch 16/30
+10/10 [==============================] - 4s 355ms/step - loss: 0.0011 - acc: 1.0000
+Epoch 17/30
+10/10 [==============================] - 3s 342ms/step - loss: 0.0034 - acc: 1.0000
+Epoch 18/30
+10/10 [==============================] - 4s 353ms/step - loss: 0.0120 - acc: 0.9959
+Epoch 19/30
+10/10 [==============================] - 4s 356ms/step - loss: 0.0064 - acc: 0.9959
+Epoch 20/30
+10/10 [==============================] - 3s 344ms/step - loss: 0.0033 - acc: 1.0000
+Epoch 21/30
+10/10 [==============================] - 4s 352ms/step - loss: 4.7614e-04 - acc: 1.0000
+Epoch 22/30
+10/10 [==============================] - 4s 350ms/step - loss: 9.6353e-04 - acc: 1.0000
+Epoch 23/30
+10/10 [==============================] - 3s 345ms/step - loss: 4.9644e-04 - acc: 1.0000
+Epoch 24/30
+10/10 [==============================] - 3s 349ms/step - loss: 5.0051e-04 - acc: 1.0000
+Epoch 25/30
+10/10 [==============================] - 4s 350ms/step - loss: 1.9847e-04 - acc: 1.0000
+Epoch 26/30
+10/10 [==============================] - 3s 343ms/step - loss: 2.9107e-04 - acc: 1.0000
+Epoch 27/30
+10/10 [==============================] - 4s 362ms/step - loss: 3.4431e-04 - acc: 1.0000
+Epoch 28/30
+10/10 [==============================] - 4s 353ms/step - loss: 2.2620e-04 - acc: 1.0000
+Epoch 29/30
+10/10 [==============================] - 3s 348ms/step - loss: 1.3071e-04 - acc: 1.0000
+Epoch 30/30
+10/10 [==============================] - 4s 355ms/step - loss: 9.1067e-05 - acc: 1.0000
+result\_list 3 = [array([3]), array([0]), array([1]), array([0]), array([1]), array([2]), array([1]), array([1])]
+Epoch 1/10
+30/30 [==============================] - 11s 364ms/step - loss: 0.3139 - acc: 0.8894
+Epoch 2/10
+30/30 [==============================] - 11s 360ms/step - loss: 0.0283 - acc: 0.9941
+Epoch 3/10
+30/30 [==============================] - 11s 359ms/step - loss: 0.0111 - acc: 0.9955
+Epoch 4/10
+30/30 [==============================] - 10s 350ms/step - loss: 0.0150 - acc: 0.9962
+Epoch 5/10
+30/30 [==============================] - 11s 351ms/step - loss: 0.0010 - acc: 1.0000
+Epoch 6/10
+30/30 [==============================] - 11s 351ms/step - loss: 3.9365e-04 - acc: 1.0000
+Epoch 7/10
+30/30 [==============================] - 10s 346ms/step - loss: 2.7128e-04 - acc: 1.0000
+Epoch 8/10
+30/30 [==============================] - 11s 353ms/step - loss: 1.6334e-04 - acc: 1.0000
+Epoch 9/10
+30/30 [==============================] - 11s 352ms/step - loss: 2.0580e-04 - acc: 1.0000
+Epoch 10/10
+30/30 [==============================] - 10s 350ms/step - loss: 9.9307e-05 - acc: 1.0000
+result\_list 4 = [array([3]), array([0]), array([0]), array([0]), array([1]), array([2]), array([1]), array([1])]
+Epoch 1/20
+30/30 [==============================] - 10s 349ms/step - loss: 0.6083 - acc: 0.8118
+Epoch 2/20
+30/30 [==============================] - 10s 346ms/step - loss: 0.0334 - acc: 0.9906
+Epoch 3/20
+30/30 [==============================] - 10s 347ms/step - loss: 0.0044 - acc: 1.0000
+Epoch 4/20
+30/30 [==============================] - 10s 347ms/step - loss: 0.0039 - acc: 0.9990
+Epoch 5/20
+30/30 [==============================] - 10s 348ms/step - loss: 0.0038 - acc: 0.9990
+Epoch 6/20
+30/30 [==============================] - 10s 346ms/step - loss: 6.4619e-04 - acc: 1.0000
+Epoch 7/20
+30/30 [==============================] - 11s 351ms/step - loss: 0.0038 - acc: 0.9990
+Epoch 8/20
+30/30 [==============================] - 10s 349ms/step - loss: 0.0029 - acc: 1.0000
+Epoch 9/20
+30/30 [==============================] - 10s 348ms/step - loss: 0.0049 - acc: 0.9976
+Epoch 10/20
+30/30 [==============================] - 10s 347ms/step - loss: 0.0033 - acc: 0.9986
+Epoch 11/20
+30/30 [==============================] - 10s 348ms/step - loss: 0.0028 - acc: 0.9990
+Epoch 12/20
+30/30 [==============================] - 10s 347ms/step - loss: 3.1902e-04 - acc: 1.0000
+Epoch 13/20
+30/30 [==============================] - 10s 347ms/step - loss: 1.3815e-04 - acc: 1.0000
+Epoch 14/20
+30/30 [==============================] - 10s 347ms/step - loss: 9.5788e-05 - acc: 1.0000
+Epoch 15/20
+30/30 [==============================] - 10s 347ms/step - loss: 7.1381e-05 - acc: 1.0000
+Epoch 16/20
+30/30 [==============================] - 10s 349ms/step - loss: 6.2602e-05 - acc: 1.0000
+Epoch 17/20
+30/30 [==============================] - 10s 345ms/step - loss: 5.0042e-05 - acc: 1.0000
+Epoch 18/20
+30/30 [==============================] - 10s 346ms/step - loss: 2.6433e-05 - acc: 1.0000
+Epoch 19/20
+30/30 [==============================] - 10s 347ms/step - loss: 2.6915e-05 - acc: 1.0000
+Epoch 20/20
+30/30 [==============================] - 10s 350ms/step - loss: 1.7202e-05 - acc: 1.0000
+result\_list 5 = [array([3]), array([0]), array([0]), array([0]), array([1]), array([2]), array([1]), array([1])]
+Epoch 1/30
+30/30 [==============================] - 10s 348ms/step - loss: 0.3172 - acc: 0.8876
+Epoch 2/30
+30/30 [==============================] - 10s 349ms/step - loss: 0.0405 - acc: 0.9854
+Epoch 3/30
+30/30 [==============================] - 10s 350ms/step - loss: 0.0098 - acc: 0.9972
+Epoch 4/30
+30/30 [==============================] - 10s 349ms/step - loss: 0.0015 - acc: 1.0000
+Epoch 5/30
+30/30 [==============================] - 10s 345ms/step - loss: 0.0011 - acc: 1.0000
+Epoch 6/30
+30/30 [==============================] - 10s 346ms/step - loss: 5.0808e-04 - acc: 1.0000
+Epoch 7/30
+30/30 [==============================] - 10s 347ms/step - loss: 8.9472e-04 - acc: 1.0000
+Epoch 8/30
+30/30 [==============================] - 10s 347ms/step - loss: 3.5568e-04 - acc: 1.0000
+Epoch 9/30
+30/30 [==============================] - 10s 346ms/step - loss: 2.1264e-04 - acc: 1.0000
+Epoch 10/30
+30/30 [==============================] - 10s 348ms/step - loss: 1.2981e-04 - acc: 1.0000
+Epoch 11/30
+30/30 [==============================] - 10s 341ms/step - loss: 9.9043e-05 - acc: 1.0000
+Epoch 12/30
+30/30 [==============================] - 10s 348ms/step - loss: 2.7809e-04 - acc: 1.0000
+Epoch 13/30
+30/30 [==============================] - 10s 347ms/step - loss: 5.7530e-05 - acc: 1.0000
+Epoch 14/30
+30/30 [==============================] - 10s 345ms/step - loss: 7.0844e-05 - acc: 1.0000
+Epoch 15/30
+30/30 [==============================] - 10s 344ms/step - loss: 3.6135e-05 - acc: 1.0000
+Epoch 16/30
+30/30 [==============================] - 10s 348ms/step - loss: 3.5554e-05 - acc: 1.0000
+Epoch 17/30
+30/30 [==============================] - 10s 344ms/step - loss: 3.1052e-05 - acc: 1.0000
+Epoch 18/30
+30/30 [==============================] - 10s 348ms/step - loss: 7.0315e-05 - acc: 1.0000
+Epoch 19/30
+30/30 [==============================] - 10s 345ms/step - loss: 4.4931e-05 - acc: 1.0000
+Epoch 20/30
+30/30 [==============================] - 10s 346ms/step - loss: 2.9425e-05 - acc: 1.0000
+Epoch 21/30
+30/30 [==============================] - 10s 345ms/step - loss: 2.9162e-05 - acc: 1.0000
+Epoch 22/30
+30/30 [==============================] - 10s 347ms/step - loss: 2.2292e-05 - acc: 1.0000
+Epoch 23/30
+30/30 [==============================] - 10s 347ms/step - loss: 2.0911e-05 - acc: 1.0000
+Epoch 24/30
+30/30 [==============================] - 10s 348ms/step - loss: 3.4030e-05 - acc: 1.0000
+Epoch 25/30
+30/30 [==============================] - 10s 348ms/step - loss: 2.0165e-05 - acc: 1.0000
+Epoch 26/30
+30/30 [==============================] - 10s 346ms/step - loss: 3.3125e-05 - acc: 1.0000
+Epoch 27/30
+30/30 [==============================] - 10s 348ms/step - loss: 1.8703e-05 - acc: 1.0000
+Epoch 28/30
+30/30 [==============================] - 10s 348ms/step - loss: 2.7606e-05 - acc: 1.0000
+Epoch 29/30
+30/30 [==============================] - 11s 352ms/step - loss: 1.6908e-05 - acc: 1.0000
+Epoch 30/30
+30/30 [==============================] - 10s 346ms/step - loss: 2.2480e-05 - acc: 1.0000
+result\_list 6 = [array([3]), array([0]), array([3]), array([0]), array([1]), array([2]), array([1]), array([1])]
+Epoch 1/10
+50/50 [==============================] - 17s 350ms/step - loss: 0.2946 - acc: 0.9000
+Epoch 2/10
+50/50 [==============================] - 17s 346ms/step - loss: 0.0059 - acc: 0.9992
+Epoch 3/10
+50/50 [==============================] - 450s 9s/step - loss: 0.0035 - acc: 0.9994
+Epoch 4/10
+50/50 [==============================] - 18s 357ms/step - loss: 5.5286e-04 - acc: 1.0000
+Epoch 5/10
+50/50 [==============================] - 18s 358ms/step - loss: 2.0346e-04 - acc: 1.0000
+Epoch 6/10
+50/50 [==============================] - 18s 365ms/step - loss: 3.5862e-04 - acc: 1.0000
+Epoch 7/10
+50/50 [==============================] - 18s 362ms/step - loss: 8.1310e-05 - acc: 1.0000
+Epoch 8/10
+50/50 [==============================] - 18s 354ms/step - loss: 7.7019e-05 - acc: 1.0000
+Epoch 9/10
+50/50 [==============================] - 18s 351ms/step - loss: 4.5675e-05 - acc: 1.0000
+Epoch 10/10
+50/50 [==============================] - 17s 348ms/step - loss: 3.9639e-05 - acc: 1.0000
+result\_list 7 = [array([3]), array([0]), array([0]), array([0]), array([1]), array([2]), array([1]), array([1])]
+Epoch 1/20
+50/50 [==============================] - 18s 363ms/step - loss: 0.2688 - acc: 0.9144
+Epoch 2/20
+50/50 [==============================] - 18s 360ms/step - loss: 0.0083 - acc: 0.9985
+Epoch 3/20
+50/50 [==============================] - 17s 349ms/step - loss: 0.0043 - acc: 0.9981
+Epoch 4/20
+50/50 [==============================] - 18s 350ms/step - loss: 0.0028 - acc: 0.9994
+Epoch 5/20
+50/50 [==============================] - 17s 348ms/step - loss: 5.6227e-04 - acc: 1.0000
+Epoch 6/20
+50/50 [==============================] - 18s 351ms/step - loss: 1.1896e-04 - acc: 1.0000
+Epoch 7/20
+50/50 [==============================] - 17s 345ms/step - loss: 7.1609e-05 - acc: 1.0000
+Epoch 8/20
+50/50 [==============================] - 17s 345ms/step - loss: 5.5726e-05 - acc: 1.0000
+Epoch 9/20
+50/50 [==============================] - 17s 349ms/step - loss: 4.5858e-05 - acc: 1.0000
+Epoch 10/20
+50/50 [==============================] - 17s 348ms/step - loss: 3.2802e-05 - acc: 1.0000
+Epoch 11/20
+50/50 [==============================] - 17s 346ms/step - loss: 2.6677e-05 - acc: 1.0000
+Epoch 12/20
+50/50 [==============================] - 17s 348ms/step - loss: 2.2097e-05 - acc: 1.0000
+Epoch 13/20
+50/50 [==============================] - 17s 346ms/step - loss: 1.7446e-05 - acc: 1.0000
+Epoch 14/20
+50/50 [==============================] - 17s 349ms/step - loss: 1.3902e-05 - acc: 1.0000
+Epoch 15/20
+50/50 [==============================] - 17s 349ms/step - loss: 1.6745e-05 - acc: 1.0000
+Epoch 16/20
+50/50 [==============================] - 17s 347ms/step - loss: 1.0974e-05 - acc: 1.0000
+Epoch 17/20
+50/50 [==============================] - 17s 346ms/step - loss: 1.5991e-05 - acc: 1.0000
+Epoch 18/20
+50/50 [==============================] - 17s 346ms/step - loss: 6.5839e-06 - acc: 1.0000
+Epoch 19/20
+50/50 [==============================] - 17s 347ms/step - loss: 4.3697e-05 - acc: 1.0000
+Epoch 20/20
+50/50 [==============================] - 17s 344ms/step - loss: 0.0484 - acc: 0.9871
+result\_list 8 = [array([3]), array([0]), array([2]), array([0]), array([1]), array([2]), array([1]), array([1])]
+Epoch 1/30
+50/50 [==============================] - 17s 346ms/step - loss: 0.2702 - acc: 0.9106
+Epoch 2/30
+50/50 [==============================] - 17s 348ms/step - loss: 0.0147 - acc: 0.9954
+Epoch 3/30
+50/50 [==============================] - 17s 343ms/step - loss: 0.0016 - acc: 1.0000
+Epoch 4/30
+50/50 [==============================] - 17s 344ms/step - loss: 4.5778e-04 - acc: 1.0000
+Epoch 5/30
+50/50 [==============================] - 17s 347ms/step - loss: 2.2670e-04 - acc: 1.0000
+Epoch 6/30
+50/50 [==============================] - 17s 343ms/step - loss: 1.0649e-04 - acc: 1.0000
+Epoch 7/30
+50/50 [==============================] - 17s 346ms/step - loss: 7.7002e-05 - acc: 1.0000
+Epoch 8/30
+50/50 [==============================] - 17s 347ms/step - loss: 4.6537e-05 - acc: 1.0000
+Epoch 9/30
+50/50 [==============================] - 17s 347ms/step - loss: 5.9361e-05 - acc: 1.0000
+Epoch 10/30
+50/50 [==============================] - 18s 352ms/step - loss: 4.5782e-05 - acc: 1.0000
+Epoch 11/30
+50/50 [==============================] - 18s 355ms/step - loss: 5.2533e-05 - acc: 1.0000
+Epoch 12/30
+50/50 [==============================] - 18s 350ms/step - loss: 5.1519e-05 - acc: 1.0000
+Epoch 13/30
+50/50 [==============================] - 17s 348ms/step - loss: 5.3014e-05 - acc: 1.0000
+Epoch 14/30
+50/50 [==============================] - 17s 347ms/step - loss: 2.6895e-05 - acc: 1.0000
+Epoch 15/30
+50/50 [==============================] - 17s 346ms/step - loss: 1.7448e-05 - acc: 1.0000
+Epoch 16/30
+50/50 [==============================] - 17s 347ms/step - loss: 3.5181e-05 - acc: 1.0000
+Epoch 17/30
+50/50 [==============================] - 17s 348ms/step - loss: 3.8505e-05 - acc: 1.0000
+Epoch 18/30
+50/50 [==============================] - 17s 346ms/step - loss: 1.8166e-05 - acc: 1.0000
+Epoch 19/30
+50/50 [==============================] - 17s 347ms/step - loss: 9.0046e-06 - acc: 1.0000
+Epoch 20/30
+50/50 [==============================] - 17s 345ms/step - loss: 1.3002e-05 - acc: 1.0000
+Epoch 21/30
+50/50 [==============================] - 17s 346ms/step - loss: 1.5694e-05 - acc: 1.0000
+Epoch 22/30
+50/50 [==============================] - 17s 348ms/step - loss: 8.1767e-06 - acc: 1.0000
+Epoch 23/30
+50/50 [==============================] - 18s 351ms/step - loss: 1.4051e-05 - acc: 1.0000
+Epoch 24/30
+50/50 [==============================] - 17s 345ms/step - loss: 8.1090e-06 - acc: 1.0000
+Epoch 25/30
+50/50 [==============================] - 17s 345ms/step - loss: 5.6202e-06 - acc: 1.0000
+Epoch 26/30
+50/50 [==============================] - 17s 348ms/step - loss: 6.9406e-06 - acc: 1.0000
+Epoch 27/30
+50/50 [==============================] - 17s 344ms/step - loss: 7.7739e-06 - acc: 1.0000
+Epoch 28/30
+50/50 [==============================] - 17s 346ms/step - loss: 6.0142e-06 - acc: 1.0000
+Epoch 29/30
+50/50 [==============================] - 18s 351ms/step - loss: 5.8701e-06 - acc: 1.0000
+Epoch 30/30
+50/50 [==============================] - 18s 350ms/step - loss: 7.1696e-06 - acc: 1.0000
+result\_list 9 = [array([3]), array([0]), array([0]), array([0]), array([1]), array([2]), array([1]), array([1])]
+
+    \end{Verbatim}
+
+    Now I have following results except for (steps\_per\_epoch: 50, epochs:
+100, I will run this time-consuming one independently)\\
+result\_list1 = {[}array({[}3{]}), array({[}0{]}), array({[}0{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list2 = {[}array({[}3{]}), array({[}0{]}), array({[}0{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list3 = {[}array({[}3{]}), array({[}0{]}), array({[}1{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list4 = {[}array({[}3{]}), array({[}0{]}), array({[}0{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list5 = {[}array({[}3{]}), array({[}0{]}), array({[}0{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list6 = {[}array({[}3{]}), array({[}0{]}), array({[}3{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list7 = {[}array({[}3{]}), array({[}0{]}), array({[}0{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list8 = {[}array({[}3{]}), array({[}0{]}), array({[}2{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list9 = {[}array({[}3{]}), array({[}0{]}), array({[}0{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} 3\PYZhy{}(a)}
+         \PY{n}{classifier2}\PY{o}{=}\PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n}{classifier}\PY{p}{)}
+         \PY{n}{classifier2}\PY{o}{.}\PY{n}{fit\PYZus{}generator}\PY{p}{(}\PY{n}{generator}\PY{o}{=}\PY{n}{train\PYZus{}generator}\PY{p}{,} \PY{n}{steps\PYZus{}per\PYZus{}epoch}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} 
+                                   \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/100
+50/50 [==============================] - 18s 352ms/step - loss: 0.2435 - acc: 0.9108
+Epoch 2/100
+50/50 [==============================] - 18s 357ms/step - loss: 0.0079 - acc: 0.9987
+Epoch 3/100
+50/50 [==============================] - 18s 357ms/step - loss: 0.0030 - acc: 1.0000
+Epoch 4/100
+50/50 [==============================] - 17s 345ms/step - loss: 3.0245e-04 - acc: 1.0000
+Epoch 5/100
+50/50 [==============================] - 17s 346ms/step - loss: 1.9619e-04 - acc: 1.0000
+Epoch 6/100
+50/50 [==============================] - 17s 348ms/step - loss: 1.2140e-04 - acc: 1.0000
+Epoch 7/100
+50/50 [==============================] - 18s 357ms/step - loss: 6.7478e-05 - acc: 1.0000
+Epoch 8/100
+50/50 [==============================] - 18s 366ms/step - loss: 4.2527e-05 - acc: 1.0000
+Epoch 9/100
+50/50 [==============================] - 18s 358ms/step - loss: 3.3960e-05 - acc: 1.0000
+Epoch 10/100
+50/50 [==============================] - 18s 355ms/step - loss: 9.1267e-05 - acc: 1.0000
+Epoch 11/100
+50/50 [==============================] - 18s 353ms/step - loss: 4.9506e-05 - acc: 1.0000
+Epoch 12/100
+50/50 [==============================] - 18s 363ms/step - loss: 2.1038e-05 - acc: 1.0000
+Epoch 13/100
+50/50 [==============================] - 18s 350ms/step - loss: 2.8236e-05 - acc: 1.0000
+Epoch 14/100
+50/50 [==============================] - 17s 349ms/step - loss: 1.8048e-05 - acc: 1.0000
+Epoch 15/100
+50/50 [==============================] - 18s 350ms/step - loss: 1.2989e-05 - acc: 1.0000
+Epoch 16/100
+50/50 [==============================] - 17s 349ms/step - loss: 1.5367e-05 - acc: 1.0000
+Epoch 17/100
+50/50 [==============================] - 17s 347ms/step - loss: 1.1910e-05 - acc: 1.0000
+Epoch 18/100
+50/50 [==============================] - 18s 360ms/step - loss: 1.1000e-05 - acc: 1.0000
+Epoch 19/100
+50/50 [==============================] - 19s 374ms/step - loss: 1.2357e-05 - acc: 1.0000
+Epoch 20/100
+50/50 [==============================] - 19s 372ms/step - loss: 9.3309e-06 - acc: 1.0000
+Epoch 21/100
+50/50 [==============================] - 18s 366ms/step - loss: 7.6008e-06 - acc: 1.0000
+Epoch 22/100
+50/50 [==============================] - 19s 371ms/step - loss: 1.2957e-05 - acc: 1.0000
+Epoch 23/100
+50/50 [==============================] - 18s 358ms/step - loss: 9.1225e-06 - acc: 1.0000
+Epoch 24/100
+50/50 [==============================] - 18s 365ms/step - loss: 1.0397e-05 - acc: 1.0000
+Epoch 25/100
+50/50 [==============================] - 18s 366ms/step - loss: 6.6096e-06 - acc: 1.0000
+Epoch 26/100
+50/50 [==============================] - 19s 370ms/step - loss: 7.2047e-06 - acc: 1.0000
+Epoch 27/100
+50/50 [==============================] - 18s 365ms/step - loss: 4.9453e-06 - acc: 1.0000
+Epoch 28/100
+50/50 [==============================] - 18s 364ms/step - loss: 5.5001e-06 - acc: 1.0000
+Epoch 29/100
+50/50 [==============================] - 18s 364ms/step - loss: 5.2547e-06 - acc: 1.0000
+Epoch 30/100
+50/50 [==============================] - 18s 366ms/step - loss: 3.3422e-06 - acc: 1.0000
+Epoch 31/100
+50/50 [==============================] - 18s 357ms/step - loss: 4.4061e-06 - acc: 1.0000
+Epoch 32/100
+50/50 [==============================] - 18s 357ms/step - loss: 4.1453e-06 - acc: 1.0000
+Epoch 33/100
+50/50 [==============================] - 18s 355ms/step - loss: 6.8707e-06 - acc: 1.0000
+Epoch 34/100
+50/50 [==============================] - 18s 353ms/step - loss: 3.0058e-06 - acc: 1.0000
+Epoch 35/100
+50/50 [==============================] - 17s 346ms/step - loss: 2.6628e-06 - acc: 1.0000
+Epoch 36/100
+50/50 [==============================] - 17s 338ms/step - loss: 3.3586e-06 - acc: 1.0000
+Epoch 37/100
+50/50 [==============================] - 17s 336ms/step - loss: 2.7561e-06 - acc: 1.0000
+Epoch 38/100
+50/50 [==============================] - 17s 338ms/step - loss: 2.4092e-06 - acc: 1.0000
+Epoch 39/100
+50/50 [==============================] - 17s 343ms/step - loss: 2.8625e-06 - acc: 1.0000
+Epoch 40/100
+50/50 [==============================] - 17s 338ms/step - loss: 2.9711e-06 - acc: 1.0000
+Epoch 41/100
+50/50 [==============================] - 17s 335ms/step - loss: 2.3083e-06 - acc: 1.0000
+Epoch 42/100
+50/50 [==============================] - 17s 338ms/step - loss: 2.3467e-06 - acc: 1.0000
+Epoch 43/100
+50/50 [==============================] - 17s 336ms/step - loss: 1.8940e-06 - acc: 1.0000
+Epoch 44/100
+50/50 [==============================] - 17s 336ms/step - loss: 2.8364e-06 - acc: 1.0000
+Epoch 45/100
+50/50 [==============================] - 17s 338ms/step - loss: 1.7461e-06 - acc: 1.0000
+Epoch 46/100
+50/50 [==============================] - 17s 336ms/step - loss: 2.3474e-06 - acc: 1.0000
+Epoch 47/100
+50/50 [==============================] - 17s 336ms/step - loss: 2.6196e-06 - acc: 1.0000
+Epoch 48/100
+50/50 [==============================] - 17s 338ms/step - loss: 1.8493e-06 - acc: 1.0000
+Epoch 49/100
+50/50 [==============================] - 17s 335ms/step - loss: 1.9251e-06 - acc: 1.0000
+Epoch 50/100
+50/50 [==============================] - 17s 336ms/step - loss: 2.1036e-06 - acc: 1.0000
+Epoch 51/100
+50/50 [==============================] - 17s 337ms/step - loss: 2.1087e-06 - acc: 1.0000
+Epoch 52/100
+50/50 [==============================] - 17s 335ms/step - loss: 1.4288e-06 - acc: 1.0000
+Epoch 53/100
+50/50 [==============================] - 17s 336ms/step - loss: 1.2940e-06 - acc: 1.0000
+Epoch 54/100
+50/50 [==============================] - 17s 338ms/step - loss: 2.1190e-06 - acc: 1.0000
+Epoch 55/100
+50/50 [==============================] - 17s 336ms/step - loss: 2.0437e-06 - acc: 1.0000
+Epoch 56/100
+50/50 [==============================] - 17s 336ms/step - loss: 1.2529e-06 - acc: 1.0000
+Epoch 57/100
+50/50 [==============================] - 17s 337ms/step - loss: 1.2933e-06 - acc: 1.0000
+Epoch 58/100
+50/50 [==============================] - 17s 336ms/step - loss: 9.9634e-07 - acc: 1.0000
+Epoch 59/100
+50/50 [==============================] - 17s 335ms/step - loss: 1.4651e-06 - acc: 1.0000
+Epoch 60/100
+50/50 [==============================] - 17s 338ms/step - loss: 1.0894e-06 - acc: 1.0000
+Epoch 61/100
+50/50 [==============================] - 17s 336ms/step - loss: 1.0835e-06 - acc: 1.0000
+Epoch 62/100
+50/50 [==============================] - 17s 335ms/step - loss: 8.5683e-07 - acc: 1.0000
+Epoch 63/100
+50/50 [==============================] - 17s 337ms/step - loss: 9.2698e-07 - acc: 1.0000
+Epoch 64/100
+50/50 [==============================] - 17s 336ms/step - loss: 1.1258e-06 - acc: 1.0000
+Epoch 65/100
+50/50 [==============================] - 17s 337ms/step - loss: 8.0554e-07 - acc: 1.0000
+Epoch 66/100
+50/50 [==============================] - 17s 337ms/step - loss: 1.0110e-06 - acc: 1.0000
+Epoch 67/100
+50/50 [==============================] - 17s 336ms/step - loss: 9.5002e-07 - acc: 1.0000
+Epoch 68/100
+50/50 [==============================] - 17s 336ms/step - loss: 1.1129e-06 - acc: 1.0000
+Epoch 69/100
+50/50 [==============================] - 17s 338ms/step - loss: 8.1249e-07 - acc: 1.0000
+Epoch 70/100
+50/50 [==============================] - 17s 336ms/step - loss: 6.4807e-07 - acc: 1.0000
+Epoch 71/100
+50/50 [==============================] - 17s 336ms/step - loss: 6.6056e-07 - acc: 1.0000
+Epoch 72/100
+50/50 [==============================] - 17s 338ms/step - loss: 6.4700e-07 - acc: 1.0000
+Epoch 73/100
+50/50 [==============================] - 17s 336ms/step - loss: 7.4923e-07 - acc: 1.0000
+Epoch 74/100
+50/50 [==============================] - 17s 335ms/step - loss: 6.9124e-07 - acc: 1.0000
+Epoch 75/100
+50/50 [==============================] - 17s 338ms/step - loss: 5.3556e-07 - acc: 1.0000
+Epoch 76/100
+50/50 [==============================] - 17s 336ms/step - loss: 5.9247e-07 - acc: 1.0000
+Epoch 77/100
+50/50 [==============================] - 17s 336ms/step - loss: 5.5592e-07 - acc: 1.0000
+Epoch 78/100
+50/50 [==============================] - 17s 338ms/step - loss: 4.9615e-07 - acc: 1.0000
+Epoch 79/100
+50/50 [==============================] - 17s 336ms/step - loss: 3.8777e-07 - acc: 1.0000
+Epoch 80/100
+50/50 [==============================] - 17s 336ms/step - loss: 5.4226e-07 - acc: 1.0000
+Epoch 81/100
+50/50 [==============================] - 17s 338ms/step - loss: 4.6209e-07 - acc: 1.0000
+Epoch 82/100
+50/50 [==============================] - 17s 335ms/step - loss: 5.2907e-07 - acc: 1.0000
+Epoch 83/100
+50/50 [==============================] - 17s 336ms/step - loss: 4.6862e-07 - acc: 1.0000
+Epoch 84/100
+50/50 [==============================] - 17s 337ms/step - loss: 3.8044e-07 - acc: 1.0000
+Epoch 85/100
+50/50 [==============================] - 17s 336ms/step - loss: 5.5401e-07 - acc: 1.0000
+Epoch 86/100
+50/50 [==============================] - 17s 337ms/step - loss: 3.8138e-07 - acc: 1.0000
+Epoch 87/100
+50/50 [==============================] - 17s 338ms/step - loss: 3.4543e-07 - acc: 1.0000
+Epoch 88/100
+50/50 [==============================] - 17s 336ms/step - loss: 4.4993e-07 - acc: 1.0000
+Epoch 89/100
+50/50 [==============================] - 17s 336ms/step - loss: 3.8035e-07 - acc: 1.0000
+Epoch 90/100
+50/50 [==============================] - 17s 338ms/step - loss: 3.9657e-07 - acc: 1.0000
+Epoch 91/100
+50/50 [==============================] - 17s 336ms/step - loss: 3.3421e-07 - acc: 1.0000
+Epoch 92/100
+50/50 [==============================] - 17s 336ms/step - loss: 3.7887e-07 - acc: 1.0000
+Epoch 93/100
+50/50 [==============================] - 17s 338ms/step - loss: 3.6112e-07 - acc: 1.0000
+Epoch 94/100
+50/50 [==============================] - 17s 336ms/step - loss: 4.0338e-07 - acc: 1.0000
+Epoch 95/100
+50/50 [==============================] - 17s 336ms/step - loss: 3.8261e-07 - acc: 1.0000
+Epoch 96/100
+50/50 [==============================] - 17s 337ms/step - loss: 3.0949e-07 - acc: 1.0000
+Epoch 97/100
+50/50 [==============================] - 17s 336ms/step - loss: 3.1861e-07 - acc: 1.0000
+Epoch 98/100
+50/50 [==============================] - 17s 336ms/step - loss: 4.2704e-07 - acc: 1.0000
+Epoch 99/100
+50/50 [==============================] - 17s 338ms/step - loss: 2.7652e-07 - acc: 1.0000
+Epoch 100/100
+50/50 [==============================] - 17s 336ms/step - loss: 3.2667e-07 - acc: 1.0000
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} <keras.callbacks.History at 0x1539f0c10>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{img\PYZus{}dir} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Users/zhongyizhang/Desktop/dataset\PYZus{}test/}\PY{l+s+s2}{\PYZdq{}} \PY{c+c1}{\PYZsh{} Enter Directory of all images}
+         
+         \PY{c+c1}{\PYZsh{} iterate over each test image}
+         \PY{c+c1}{\PYZsh{} make a prediction and add to results }
+         \PY{n}{data\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{img\PYZus{}dir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{files} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{n}{data\PYZus{}path}\PY{p}{)}
+         \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{f1} \PY{o+ow}{in} \PY{n}{files}\PY{p}{:}
+             \PY{n}{img} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{load\PYZus{}img}\PY{p}{(}\PY{n}{f1}\PY{p}{,} \PY{n}{target\PYZus{}size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{)}\PY{p}{)}
+             \PY{n}{img} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{img\PYZus{}to\PYZus{}array}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             \PY{n}{img} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             \PY{n}{result} \PY{o}{=} \PY{n}{classifier2}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             \PY{n}{r} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{result}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{results}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{r}\PY{p}{)}
+         
+         \PY{n}{results}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} [array([3]),
+          array([0]),
+          array([0]),
+          array([0]),
+          array([1]),
+          array([2]),
+          array([1]),
+          array([1])]
+\end{Verbatim}
+            
+    In conclusion I have foloowing results by running：\\
+(steps\_per\_epoch: 10, epochs: 10)\\
+(steps\_per\_epoch: 10, epochs: 20)\\
+(steps\_per\_epoch: 10, epochs: 30)\\
+(steps\_per\_epoch: 30, epochs: 10)\\
+(steps\_per\_epoch: 30, epochs: 20)\\
+(steps\_per\_epoch: 30, epochs: 30)\\
+(steps\_per\_epoch: 50, epochs: 10)\\
+(steps\_per\_epoch: 50, epochs: 20)\\
+(steps\_per\_epoch: 50, epochs: 30)\\
+(steps\_per\_epoch: 50, epochs: 100)
+
+    result\_list1 = {[}array({[}3{]}), array({[}0{]}), array({[}0{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list2 = {[}array({[}3{]}), array({[}0{]}), array({[}0{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list3 = {[}array({[}3{]}), array({[}0{]}), array({[}1{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list4 = {[}array({[}3{]}), array({[}0{]}), array({[}0{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list5 = {[}array({[}3{]}), array({[}0{]}), array({[}0{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list6 = {[}array({[}3{]}), array({[}0{]}), array({[}3{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list7 = {[}array({[}3{]}), array({[}0{]}), array({[}0{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list8 = {[}array({[}3{]}), array({[}0{]}), array({[}2{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list9 = {[}array({[}3{]}), array({[}0{]}), array({[}0{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}\\
+result\_list10 = {[}array({[}3{]}), array({[}0{]}), array({[}0{]}),
+array({[}0{]}), array({[}1{]}), array({[}2{]}), array({[}1{]}),
+array({[}1{]}){]}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{} result\PYZus{}list1 = [array([3]), array([0]), array([0]), array([0]), array([1]), array([2]), array([1]), array([1])]}
+         \PY{c+c1}{\PYZsh{} result\PYZus{}list2 = [array([3]), array([0]), array([0]), array([0]), array([1]), array([2]), array([1]), array([1])]}
+         \PY{c+c1}{\PYZsh{} result\PYZus{}list3 = [array([3]), array([0]), array([1]), array([0]), array([1]), array([2]), array([1]), array([1])]}
+         \PY{c+c1}{\PYZsh{} result\PYZus{}list4 = [array([3]), array([0]), array([0]), array([0]), array([1]), array([2]), array([1]), array([1])]}
+         \PY{c+c1}{\PYZsh{} result\PYZus{}list5 = [array([3]), array([0]), array([0]), array([0]), array([1]), array([2]), array([1]), array([1])]}
+         \PY{c+c1}{\PYZsh{} result\PYZus{}list6 = [array([3]), array([0]), array([3]), array([0]), array([1]), array([2]), array([1]), array([1])]}
+         \PY{c+c1}{\PYZsh{} result\PYZus{}list7 = [array([3]), array([0]), array([0]), array([0]), array([1]), array([2]), array([1]), array([1])]}
+         \PY{c+c1}{\PYZsh{} result\PYZus{}list8 = [array([3]), array([0]), array([2]), array([0]), array([1]), array([2]), array([1]), array([1])]}
+         \PY{c+c1}{\PYZsh{} result\PYZus{}list9 = [array([3]), array([0]), array([0]), array([0]), array([1]), array([2]), array([1]), array([1])]}
+         \PY{c+c1}{\PYZsh{} result\PYZus{}list10 = [array([3]), array([0]), array([0]), array([0]), array([1]), array([2]), array([1]), array([1])]}
+         
+         \PY{n}{r1} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{r2} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{r3} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{r4} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{r5} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{r6} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{r7} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{r8} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{r9} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{r10} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ r1:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{r1}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r2:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{r2}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r3:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{r3}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r4:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{r4}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r5:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{r5}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r6:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{r6}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r7:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{r7}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r8:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{r8}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r9:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{r9}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r10:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{r10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ r1: [3, 0, 0, 0, 1, 2, 1, 1] 
+ r2: [3, 0, 0, 0, 1, 2, 1, 1] 
+ r3: [3, 0, 1, 0, 1, 2, 1, 1] 
+ r4: [3, 0, 0, 0, 1, 2, 1, 1] 
+ r5: [3, 0, 0, 0, 1, 2, 1, 1] 
+ r6: [3, 0, 3, 0, 1, 2, 1, 1] 
+ r7: [3, 0, 0, 0, 1, 2, 1, 1] 
+ r8: [3, 0, 2, 0, 1, 2, 1, 1] 
+ r9: [3, 0, 0, 0, 1, 2, 1, 1] 
+ r10: [3, 0, 0, 0, 1, 2, 1, 1]
+
+    \end{Verbatim}
+
+    Prediction results:\\
+r1: {[}3, 0, 0, 0, 1, 2, 1, 1{]}\\
+r2: {[}3, 0, 0, 0, 1, 2, 1, 1{]}\\
+r3: {[}3, 0, 1, 0, 1, 2, 1, 1{]}\\
+r4: {[}3, 0, 0, 0, 1, 2, 1, 1{]}\\
+r5: {[}3, 0, 0, 0, 1, 2, 1, 1{]}\\
+r6: {[}3, 0, 3, 0, 1, 2, 1, 1{]}\\
+r7: {[}3, 0, 0, 0, 1, 2, 1, 1{]}\\
+r8: {[}3, 0, 2, 0, 1, 2, 1, 1{]}\\
+r9: {[}3, 0, 0, 0, 1, 2, 1, 1{]}\\
+r10: {[}3, 0, 0, 0, 1, 2, 1, 1{]}\\
+Correct: {[}0, 0, 2, 2, 1, 1, 3, 3{]}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}\PY{p}{,} 
+                 \PY{p}{[}\PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mf}{0.375}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}\PY{p}{]} 
+           
+         
+         \PY{n}{df0} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Steps per Epoch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{df0}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:}    Steps per Epoch  Epochs  Accuracy
+         0               10      10     0.250
+         1               10      20     0.250
+         2               10      30     0.250
+         3               30      10     0.250
+         4               30      20     0.250
+         5               30      30     0.250
+         6               50      10     0.250
+         7               50      20     0.375
+         8               50      30     0.250
+         9               50     100     0.250
+\end{Verbatim}
+            
+    \hypertarget{conceptual-questions}{%
+\section{Conceptual Questions:}\label{conceptual-questions}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Discuss the effect of the following on accuracy and loss (train \&
+  test):
+\end{enumerate}
+
+Increasing the steps\_per\_epoch Increasing the number of epochs 5. Name
+two uses of zero padding in CNN.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\item
+  What is the use of a 1 x 1 kernel in CNN?
+\item
+  What are the advantages of a CNN over a fully connected DNN for this
+  image classification problem?
+\end{enumerate}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \hypertarget{answers}{%
+\subsubsection{Answers:}\label{answers}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Higher number of epoch could cause over-fitting. For Steps per epoch,
+  if this parameter is too high, it could also cause over-fitting,
+  although this doesn't clearly show on my running results. As the
+  number of epoch going higher, the accuracy may potentially go even
+  lower. This works the same as the Steps per epoch.
+\end{enumerate}
+
+In conclusion, the accuracy could go higher when the ``Steps per Epoch''
+parameter goes up and the ``Epoches'' parameter goes up. However, these
+two parameters go up also causes the over-fitting. Moreover, the
+accuracy could decrease again if the ``Steps per Epoch'' parameter and
+the ``Epoches'' parameter goes up too high. There are optimal values for
+these two paramters.
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Zero-padding refers to the process of symmetrically adding zeroes to
+  the input matrix. It's a commonly used modification that allows the
+  size of the input to be adjusted to our requirement. It is mostly used
+  in designing the CNN layers when the dimensions of the input volume
+  need to be preserved in the output volume.
+\end{enumerate}
+
+For two uses: Zero-padding is a generic way to:\\
+(1) control the shrinkage of dimension after applying filters larger
+than 1x1\\
+(2) avoid loosing information at the boundaries, e.g.~when weights in a
+filter drop rapidly away from its center.
+
+For a specific input, activation function, or loss function, a variant
+might perform better, i.e.~utilizing domain knowledge. However, the key
+for zero-padding is ``being generic''. For example, a completely
+different padding would be ``reflection padding'' that, instead of a
+specific value, puts a mirror of input outside the boundaries. We could
+try reflection padding and if it gives better results, then we might
+look for a justification based on the task, activation function, etc.
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  1 x 1 conv filters can be used to change the dimensionality in the
+  filter space. If 𝐹1\textgreater{}𝐹 then we are increasing
+  dimensionality, if 𝐹1\textless{}𝐹 we are decreasing dimensionality, in
+  the filter dimension. 1 x 1 convolutions are used to compute
+  reductions before the expensive 3x3 and 5x5 convolutions.
+\end{enumerate}
+
+In the Inception architecture, I can use the 1 x 1 convolutional filters
+to reduce dimensionality in the filter dimension. These 1 x 1 conv
+layers can be used in general to change the filter space dimensionality
+(either increase or decrease) and in the Inception architecture, I can
+see how effective these 1 x 1 filters can be for dimensionality
+reduction, explicitly in the filter dimension space, not the spatial
+dimension space.
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Fully connected neural networks are good enough classifiers. However,
+  they aren't good for feature extraction. Before the emergence on CNNs,
+  the state-of-the-art was to extract explicit features from images and
+  then classify these features.
+\end{enumerate}
+
+CNNs are trained to identify and extract the best features from the
+images for the problem at hand. That is their main strength. The latter
+layers of a CNN are fully connected because of their strength as a
+classifier. So these two architectures aren't competing though as you
+may think as CNNs incorporate Fully-connected layers.
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
